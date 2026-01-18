@@ -61,15 +61,15 @@ export default function SocialSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-2.5"
+          className="text-center mb-12"
         >
-          <h2 className="text-5xl md:text-7xl font-black uppercase leading-none leading-[2.25] text-lorenzo-dark lg:text-6xl">
-            WHAT'S UP
+          <h2 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase leading-none text-lorenzo-dark mb-8">
+            Me siga nas redes sociais
           </h2>
-          <h3 className="text-4xl md:text-6xl font-brier mt-2 lg:text-6xl leading-10 text-lorenzo-dark">ON SOCIALS</h3>
         </motion.div>
 
-        <motion.div
+        {/* Carrossel de imagens comentado */}
+        {/* <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, ease: "easeOut" }}
@@ -110,7 +110,7 @@ export default function SocialSection() {
               </div>
             </motion.div>
           ))}
-        </motion.div>
+        </motion.div> */}
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -119,20 +119,47 @@ export default function SocialSection() {
           viewport={{ once: true }}
           className="text-center space-y-6"
         >
-          <p className="text-lg md:text-xl font-serif text-black/80 font-medium">Follow Lorenzo on social media</p>
-
           <div className="flex flex-wrap justify-center gap-6">
-            {["TIKTOK", "INSTAGRAM", "YOUTUBE", "TWITCH"].map((platform) => (
-              <motion.a
-                key={platform}
-                href="#"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                className="font-black uppercase text-sm tracking-wider text-black hover:text-black/60 transition-colors"
-              >
-                {platform}
-              </motion.a>
-            ))}
+            <motion.a
+              href="https://www.instagram.com/domus_pedroreoli/"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              className="font-black uppercase text-sm tracking-wider text-black hover:text-black/60 transition-colors"
+            >
+              INSTAGRAM
+            </motion.a>
+            <motion.a
+              href="https://www.linkedin.com/in/pedro-lucas-reis-a93945171/"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              className="font-black uppercase text-sm tracking-wider text-black hover:text-black/60 transition-colors"
+            >
+              LINKEDIN
+            </motion.a>
+            <motion.a
+              href="https://www.youtube.com/@DevDesenvolvimento"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              className="font-black uppercase text-sm tracking-wider text-black hover:text-black/60 transition-colors"
+            >
+              YOUTUBE
+            </motion.a>
+            <motion.a
+              href="https://github.com/PedroReoli"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              className="font-black uppercase text-sm tracking-wider text-black hover:text-black/60 transition-colors"
+            >
+              GITHUB
+            </motion.a>
           </div>
         </motion.div>
       </div>

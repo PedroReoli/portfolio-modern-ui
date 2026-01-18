@@ -62,13 +62,13 @@ export default function BikeShowcase() {
               {/* Main quote with improved spacing and hierarchy */}
               <blockquote className="relative z-10 max-w-xl">
                 <p className="text-4xl md:text-5xl lg:text-6xl font-black uppercase text-lorenzo-text-light leading-[1.1] tracking-tight mb-8">
-                  <span className="block mb-2">I THINK</span>
-                  <span className="block mb-2">ABOUT BEING</span>
+                  <span className="block mb-2">Evoluir é</span>
+                  <span className="block mb-2">encarar o</span>
                   <span className="block text-lorenzo-accent font-brier normal-case text-5xl md:text-6xl -ml-1 lg:text-8xl">
-                    FASTER
+                    desafio
                   </span>
-                  <span className="block mt-2">ON THE NEXT</span>
-                  <span className="block">LAP.</span>
+                  <span className="block mt-2">e seguir</span>
+                  <span className="block">mesmo assim.</span>
                 </p>
               </blockquote>
 

@@ -1,103 +1,335 @@
 "use client"
 
 import { useState } from "react"
-import Image from "next/image"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
+import * as Icons from "react-icons/si"
+import * as TablerIcons from "react-icons/tb"
+import * as FontAwesomeIcons from "react-icons/fa"
+import technologiesData from "../technologies.json"
 
-const helmets = [
-  { id: 1, name: "Season", year: "2025", image: "/images/helmets/helmet-collection1.png" },
-  { id: 2, name: "Dark Glitter", year: "2025", image: "/images/helmets/helmet-collection2.png" },
-  { id: 3, name: "Discoball", year: "2025", image: "/images/helmets/helmet-collection3.png" },
-  { id: 4, name: "Season", year: "2024", image: "/images/helmets/helmet-collection4.png" },
-  { id: 5, name: "Japan", year: "2024", image: "/images/helmets/helmet-collection5.png" },
-  { id: 6, name: "GIF", year: "2024", image: "/images/helmets/helmet-collection6.png" },
-  { id: 7, name: "Season", year: "2025", image: "/images/helmets/helmet-collection7.png" },
-  { id: 8, name: "Dark Glitter", year: "2025", image: "/images/helmets/helmet-collection8.png" },
-  { id: 9, name: "Discoball", year: "2025", image: "/images/helmets/helmet-collection9.png" },
-  { id: 10, name: "Japan", year: "2024", image: "/images/helmets/helmet-collection10.png" },
-  { id: 11, name: "GIF", year: "2024", image: "/images/helmets/helmet-collection11.png" },
-  { id: 12, name: "Porcelain", year: "2024", image: "/images/helmets/helmet-collection12.png" },
-  { id: 13, name: "Dark Mode", year: "2024", image: "/images/helmets/helmet-collection13.png" },
-  { id: 14, name: "Raze", year: "2023", image: "/images/helmets/helmet-collection14.png" },
-  { id: 15, name: "Chrome", year: "2023", image: "/images/helmets/helmet-collection15.png" },
-  { id: 16, name: "Beachball", year: "2023", image: "/images/helmets/helmet-collection16.png" },
-  { id: 17, name: "Las Vegas", year: "2023", image: "/images/helmets/helmet-collection17.png" },
-  { id: 18, name: "Basketball", year: "2022", image: "/images/helmets/helmet-collection18.png" },
-  { id: 19, name: "Silverstone", year: "2020", image: "/images/helmets/helmet-collection19.png" },
-  { id: 20, name: "Season", year: "2021", image: "/images/helmets/helmet-collection20.png" },
+type ViewType = "stack" | "competencies"
+
+interface CompetencyItem {
+  name: string
+  description: string
+  category: string
+}
+
+const competencies: CompetencyItem[] = [
+  // Front-end
+  {
+    name: "Responsividade",
+    description: "Layout que se adapta a qualquer tela.",
+    category: "Front-end",
+  },
+  {
+    name: "Mobile First",
+    description: "Desenvolvimento focado primeiro no celular.",
+    category: "Front-end",
+  },
+  {
+    name: "Acessibilidade básica",
+    description: "Interfaces utilizáveis por todos.",
+    category: "Front-end",
+  },
+  {
+    name: "Performance",
+    description: "Páginas leves e rápidas.",
+    category: "Front-end",
+  },
+  {
+    name: "Componentização",
+    description: "Interface dividida em partes reutilizáveis.",
+    category: "Front-end",
+  },
+  {
+    name: "Atomic Design",
+    description: "Organização de componentes por níveis.",
+    category: "Front-end",
+  },
+  // Back-end
+  {
+    name: "APIs REST",
+    description: "Criação e consumo de APIs organizadas.",
+    category: "Back-end",
+  },
+  {
+    name: "Regras de negócio",
+    description: "Lógica clara no servidor.",
+    category: "Back-end",
+  },
+  {
+    name: "Banco de dados",
+    description: "Criação e manipulação de dados.",
+    category: "Back-end",
+  },
+  {
+    name: "Validação de dados",
+    description: "Evita dados incorretos.",
+    category: "Back-end",
+  },
+  {
+    name: "Segurança básica",
+    description: "Proteção contra acessos indevidos.",
+    category: "Back-end",
+  },
+  // Código e Qualidade
+  {
+    name: "Clean Code",
+    description: "Código fácil de ler e manter.",
+    category: "Código e Qualidade",
+  },
+  {
+    name: "Padronização",
+    description: "Mesmo estilo em todo projeto.",
+    category: "Código e Qualidade",
+  },
+  {
+    name: "Organização de pastas",
+    description: "Estrutura clara.",
+    category: "Código e Qualidade",
+  },
+  {
+    name: "Refatoração",
+    description: "Melhoria contínua do código.",
+    category: "Código e Qualidade",
+  },
+  // Ferramentas e Processo
+  {
+    name: "Git",
+    description: "Controle de versões.",
+    category: "Ferramentas e Processo",
+  },
+  {
+    name: "GitHub",
+    description: "Trabalho em equipe.",
+    category: "Ferramentas e Processo",
+  },
+  {
+    name: "Postman",
+    description: "Testes de APIs.",
+    category: "Ferramentas e Processo",
+  },
+  {
+    name: "Swagger",
+    description: "Documentação de APIs.",
+    category: "Ferramentas e Processo",
+  },
+  {
+    name: "Notion",
+    description: "Organização de tarefas.",
+    category: "Ferramentas e Processo",
+  },
 ]
 
+const categories = {
+  stack: ["Front-end", "Back-end", "APIs e Integrações", "Versionamento e Colaboração", "Outros"],
+  competencies: ["Front-end", "Back-end", "Código e Qualidade", "Ferramentas e Processo"],
+}
+
+// Helper para renderizar ícones dinamicamente
+const getIcon = (iconType: string) => {
+  const IconComponent =
+    (Icons as any)[iconType] ||
+    (TablerIcons as any)[iconType] ||
+    (FontAwesomeIcons as any)[iconType]
+  
+  return IconComponent || FontAwesomeIcons.FaCode
+}
+
 export default function HelmetHall() {
-  const [hoveredHelmet, setHoveredHelmet] = useState<number | null>(null)
+  const [view, setView] = useState<ViewType>("stack")
+
+  const groupedStack = categories.stack.map((category) => ({
+    category,
+    items: technologiesData.technologies.filter((tech) => tech.category === category),
+  }))
+
+  const groupedCompetencies = categories.competencies.map((category) => ({
+    category,
+    items: competencies.filter((item) => item.category === category),
+  }))
 
   return (
-    <section id="helmets" className="relative min-h-screen text-white py-24 px-6 md:px-12 bg-black">
+    <section id="technologies" className="relative min-h-screen text-white py-24 px-6 md:px-12 bg-black">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="mb-20"
+          className="mb-12 md:mb-20"
         >
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight">
-            <span className="text-white">HELMETS</span>
+          <h2 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight text-center">
+            <span className="text-white">Tecnologias e</span>
             <br />
-            <span className="text-lorenzo-accent font-brier text-8xl">HALL OF FAME</span>
+            <span className="text-lorenzo-accent font-brier text-8xl">Competências</span>
           </h2>
-          <p className="text-base md:text-lg text-white/60 mt-6 max-w-2xl">
-            From his iconic blobs to innovative one-off designs, Lorenzo has always been passionate about designing
-            innovative and memorable helmets.
+          <p className="text-base md:text-lg text-white/60 mt-6 max-w-3xl mx-auto text-center">
+            Utilizo ferramentas modernas e boas práticas para desenvolver aplicações organizadas, funcionais e de fácil
+            manutenção.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 mb-16">
-          {helmets.map((helmet, index) => (
-            <motion.div
-              key={helmet.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.03, ease: "easeOut" }}
-              viewport={{ once: true }}
-              className="group relative cursor-pointer"
-              onMouseEnter={() => setHoveredHelmet(helmet.id)}
-              onMouseLeave={() => setHoveredHelmet(null)}
-              style={{
-                gridRow: index % 4 === 1 ? "span 1" : "auto",
-              }}
-            >
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.3 }}
-                className="relative aspect-square overflow-hidden rounded-2xl bg-[#0a0a0a] 
-                           border-2 border-gray-800 
-                           group-hover:border-[#057AF3] 
-                           group-hover:shadow-2xl 
-                           group-hover:shadow-[#057AF3]/20 
-                           transition-all duration-300"
-              >
-                <div className="absolute inset-0 flex items-center justify-center p-8">
-                  <Image
-                    src={helmet.image || "/placeholder.svg"}
-                    alt={helmet.name}
-                    fill
-                    className="object-contain group-hover:scale-110 transition-transform duration-500 drop-shadow-2xl"
-                    style={{ mixBlendMode: "normal" }}
-                  />
-                </div>
-
-                <div className="absolute bottom-4 right-4 text-right">
-                  <p className="text-xs md:text-sm font-bold text-white/70 group-hover:text-white transition-colors duration-300">
-                    {helmet.name}
-                  </p>
-                  <p className="text-sm md:text-base font-black text-[#057AF3] group-hover:scale-110 group-hover:text-white transition-all duration-300 inline-block">
-                    {helmet.year}
-                  </p>
-                </div>
-              </motion.div>
-            </motion.div>
-          ))}
+        {/* Botões de alternância */}
+        <div className="flex justify-center gap-4 mb-8">
+          <motion.button
+            onClick={() => setView("stack")}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className={`px-8 py-3 rounded-lg font-bold text-lg transition-all duration-300 ${
+              view === "stack"
+                ? "bg-lorenzo-accent text-black shadow-lg shadow-lorenzo-accent/50"
+                : "bg-white/10 text-white/70 hover:bg-white/20"
+            }`}
+          >
+            Stack Tecnológica
+          </motion.button>
+          <motion.button
+            onClick={() => setView("competencies")}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className={`px-8 py-3 rounded-lg font-bold text-lg transition-all duration-300 ${
+              view === "competencies"
+                ? "bg-lorenzo-accent text-black shadow-lg shadow-lorenzo-accent/50"
+                : "bg-white/10 text-white/70 hover:bg-white/20"
+            }`}
+          >
+            Competências Técnicas
+          </motion.button>
         </div>
+
+        {/* Descrição da seção ativa */}
+        <AnimatePresence mode="wait">
+          {view === "stack" && (
+            <motion.div
+              key="stack-desc"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+              className="text-center mb-12"
+            >
+              <p className="text-base md:text-lg text-white/60 max-w-3xl mx-auto">
+                Ferramentas, linguagens e tecnologias que utilizo no desenvolvimento.
+              </p>
+            </motion.div>
+          )}
+          {view === "competencies" && (
+            <motion.div
+              key="competencies-desc"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+              className="text-center mb-12"
+            >
+              <p className="text-base md:text-lg text-white/60 max-w-3xl mx-auto">
+                Práticas e conhecimentos que aplico para garantir qualidade, organização e boa experiência do usuário.
+              </p>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Conteúdo */}
+        <AnimatePresence mode="wait">
+          {view === "stack" && (
+            <motion.div
+              key="stack"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5 }}
+              className="space-y-12"
+            >
+              {groupedStack.map((group, groupIndex) => (
+                <div key={group.category} className="space-y-6">
+                  <motion.h3
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: groupIndex * 0.1 }}
+                    className="text-2xl md:text-3xl font-bold text-lorenzo-accent mb-6"
+                  >
+                    {group.category}
+                  </motion.h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
+                    {group.items.map((tech, index) => {
+                      const IconComponent = getIcon(tech.iconType)
+                      return (
+                        <motion.div
+                          key={tech.name}
+                          initial={{ opacity: 0, y: 20 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.5, delay: (groupIndex * 0.05 + index * 0.03) }}
+                          whileHover={{ scale: 1.02, y: -3 }}
+                          className="group relative cursor-pointer"
+                        >
+                          <div className="relative overflow-hidden rounded-xl bg-[#0a0a0a] border-2 border-gray-800 group-hover:border-lorenzo-accent group-hover:shadow-xl group-hover:shadow-lorenzo-accent/20 transition-all duration-300 p-4 md:p-5">
+                            <div className="flex items-center gap-3 mb-2">
+                              <IconComponent className="text-xl md:text-2xl text-white/70 group-hover:text-lorenzo-accent transition-colors duration-300 shrink-0" />
+                              <h4 className="text-base md:text-lg font-bold text-white group-hover:text-lorenzo-accent transition-colors duration-300">
+                                {tech.name}
+                              </h4>
+                            </div>
+                          </div>
+                        </motion.div>
+                      )
+                    })}
+                  </div>
+                </div>
+              ))}
+            </motion.div>
+          )}
+
+          {view === "competencies" && (
+            <motion.div
+              key="competencies"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5 }}
+              className="space-y-12"
+            >
+              {groupedCompetencies.map((group, groupIndex) => (
+                <div key={group.category} className="space-y-6">
+                  <motion.h3
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: groupIndex * 0.1 }}
+                    className="text-2xl md:text-3xl font-bold text-lorenzo-accent mb-6"
+                  >
+                    {group.category}
+                  </motion.h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
+                    {group.items.map((item, index) => (
+                      <motion.div
+                        key={item.name}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: (groupIndex * 0.05 + index * 0.03) }}
+                        whileHover={{ scale: 1.02, y: -3 }}
+                        className="group relative cursor-pointer"
+                      >
+                        <div className="relative overflow-hidden rounded-xl bg-[#0a0a0a] border-2 border-gray-800 group-hover:border-lorenzo-accent group-hover:shadow-xl group-hover:shadow-lorenzo-accent/20 transition-all duration-300 p-4 md:p-5">
+                          <h4 className="text-base md:text-lg font-bold text-white mb-2 group-hover:text-lorenzo-accent transition-colors duration-300">
+                            {item.name}
+                          </h4>
+                          <p className="text-xs md:text-sm text-white/60 group-hover:text-white/80 transition-colors duration-300 leading-relaxed">
+                            {item.description}
+                          </p>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   )

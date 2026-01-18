@@ -1,0 +1,103 @@
+{
+  "technologies": [
+    {
+      "name": "HTML",
+      "category": "Front-end",
+      "iconType": "SiHtml5"
+    },
+    {
+      "name": "CSS",
+      "category": "Front-end",
+      "iconType": "SiCss3"
+    },
+    {
+      "name": "Tailwind",
+      "category": "Front-end",
+      "iconType": "SiTailwindcss"
+    },
+    {
+      "name": "Framer Motion",
+      "category": "Front-end",
+      "iconType": "TbBrandFramerMotion"
+    },
+    {
+      "name": "Three.js",
+      "category": "Front-end",
+      "iconType": "TbBrandThreejs"
+    },
+    {
+      "name": "React",
+      "category": "Front-end",
+      "iconType": "SiReact"
+    },
+    {
+      "name": "Next.js",
+      "category": "Front-end",
+      "iconType": "SiNextdotjs"
+    },
+    {
+      "name": "Node.js",
+      "category": "Back-end",
+      "iconType": "SiNodedotjs"
+    },
+    {
+      "name": "Express",
+      "category": "Back-end",
+      "iconType": "SiExpress"
+    },
+    {
+      "name": "NestJS",
+      "category": "Back-end",
+      "iconType": "SiNestjs"
+    },
+    {
+      "name": "SQL",
+      "category": "Back-end",
+      "iconType": "FaDatabase"
+    },
+    {
+      "name": "APIs REST",
+      "category": "APIs e Integrações",
+      "iconType": "FaServer"
+    },
+    {
+      "name": "Swagger",
+      "category": "APIs e Integrações",
+      "iconType": "SiSwagger"
+    },
+    {
+      "name": "Postman",
+      "category": "APIs e Integrações",
+      "iconType": "SiPostman"
+    },
+    {
+      "name": "Git",
+      "category": "Versionamento e Colaboração",
+      "iconType": "SiGit"
+    },
+    {
+      "name": "GitHub",
+      "category": "Versionamento e Colaboração",
+      "iconType": "SiGithub"
+    },
+    {
+      "name": "Notion",
+      "category": "Outros",
+      "iconType": "SiNotion"
+    },
+    {
+      "name": "Mobile First",
+      "category": "Outros",
+      "iconType": "FaMobileAlt"
+    }
+  ],
+  "categories": {
+    "stack": [
+      "Front-end",
+      "Back-end",
+      "APIs e Integrações",
+      "Versionamento e Colaboração",
+      "Outros"
+    ]
+  }
+}

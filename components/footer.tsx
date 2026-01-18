@@ -2,7 +2,6 @@
 
 import dynamic from "next/dynamic"
 import { motion } from "framer-motion"
-import InfiniteLogoSlider from "./infinite-logo-slider"
 
 const HelmetCanvas = dynamic(() => import("./helmet-canvas").then((mod) => mod.default), {
   ssr: false,
@@ -14,6 +13,8 @@ const HelmetCanvas = dynamic(() => import("./helmet-canvas").then((mod) => mod.d
 })
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear()
+  
   return (
     <footer className="bg-lorenzo-accent pt-0 px-4 md:px-8 min-h-screen flex flex-col justify-end relative pb-5">
       <div className="absolute top-0 left-0 right-0 h-72 bg-gradient-to-b from-[#f5f1e8] to-lorenzo-accent z-0" />
@@ -22,7 +23,7 @@ export default function Footer() {
       <div className="relative flex-1 flex flex-col w-full max-w-[1688px] mx-auto mt-12 z-10">
         {/* SVG Background Mask */}
         <div
-          className="absolute inset-0 w-full h-full z-0 bg-[#282c20] overflow-hidden"
+          className="absolute inset-0 w-full h-full z-0 bg-[#0a1a2e] overflow-hidden"
           style={{
             maskImage: 'url("/images/footer-mask.svg")',
             WebkitMaskImage: 'url("/images/footer-mask.svg")',
@@ -51,26 +52,18 @@ export default function Footer() {
           <div className="flex-1 grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch mt-0">
             {/* Left Column - Pages */}
             <div className="md:col-span-3 text-center order-2 md:order-1 md:pl-8 flex flex-col justify-center h-full">
-              <h4 className="font-black text-xs uppercase mb-6 text-lorenzo-text-light/40 tracking-[0.2em]">PAGES</h4>
+              <h4 className="font-black text-xs uppercase mb-6 text-lorenzo-text-light/40 tracking-[0.2em]">PÁGINAS</h4>
               <ul className="space-y-2">
-                {["HOME", "ON TRACK", "OFF TRACK", "CALENDAR"].map((item) => (
+                {["INÍCIO", "MISSÃO", "GALERIA", "TECNOLOGIAS"].map((item) => (
                   <li className="leading-5" key={item}>
                     <a
-                      href={`#${item.toLowerCase().replace(" ", "-")}`}
+                      href={item === "INÍCIO" ? "#" : item === "TECNOLOGIAS" ? "#technologies" : `#${item.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, "-")}`}
                       className="text-lorenzo-text-light font-bold text-xl md:text-2xl uppercase hover:text-lorenzo-accent transition-colors inline-block leading-4"
                     >
                       {item}
                     </a>
                   </li>
                 ))}
-                <li>
-                  <a
-                    href="#store"
-                    className="text-lorenzo-accent font-black text-xl md:text-2xl uppercase hover:text-white transition-colors inline-block"
-                  >
-                    STORE
-                  </a>
-                </li>
               </ul>
             </div>
 
@@ -84,11 +77,11 @@ export default function Footer() {
                   transition={{ duration: 0.8 }}
                   className="text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter leading-[0.9] text-lorenzo-text-light mix-blend-overlay opacity-90"
                 >
-                  <span className="font-sans block">ALWAYS 
-                  <span className="font-brier text-lorenzo-accent"> BRINGING</span>
+                  <span className="font-sans block">SEMPRE 
+                  <span className="font-brier text-lorenzo-accent"> TRANSFORMANDO</span>
                   </span>
                   <span className="font-sans block">
-                    THE <span className="font-brier text-lorenzo-accent">FIGHT.</span>
+                    IDEIAS EM <span className="font-brier text-lorenzo-accent">REALIDADE.</span>
                   </span>
                 </motion.h2>
               </div>
@@ -99,44 +92,69 @@ export default function Footer() {
               </div>
 
               {/* CTA Button - Adjusted bottom position to be closer to helmet */}
-              <motion.button
+              <motion.a
+                href="mailto:contato@pedroreis.dev"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="absolute -bottom-12 z-20 bg-lorenzo-accent text-lorenzo-dark font-black uppercase px-8 py-4 rounded-[14px] text-sm tracking-wider hover:bg-white transition-colors flex items-center gap-2"
               >
-                BUSINESS ENQUIRIES
+                ENTRE EM CONTATO
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M7 17L17 7M17 7H7M17 7V17" />
                 </svg>
-              </motion.button>
+              </motion.a>
             </div>
 
             {/* Right Column - Follow */}
             <div className="md:col-span-3 text-center order-3 md:order-2 md:pr-8 flex flex-col justify-center h-full">
               <h4 className="font-black text-xs uppercase mb-6 text-lorenzo-text-light/40 tracking-[0.2em]">
-                FOLLOW ON
+                SIGA NAS REDES
               </h4>
               <ul className="space-y-2">
-                {["TIKTOK", "INSTAGRAM", "YOUTUBE", "TWITCH"].map((platform) => (
-                  <li className="leading-5" key={platform}>
-                    <a
-                      href="#"
-                      className="text-lorenzo-text-light font-bold text-xl md:text-2xl uppercase hover:text-lorenzo-accent transition-colors inline-block leading-4"
-                    >
-                      {platform}
-                    </a>
-                  </li>
-                ))}
+                <li className="leading-5">
+                  <a
+                    href="https://www.instagram.com/domus_pedroreoli/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-lorenzo-text-light font-bold text-xl md:text-2xl uppercase hover:text-lorenzo-accent transition-colors inline-block leading-4"
+                  >
+                    INSTAGRAM
+                  </a>
+                </li>
+                <li className="leading-5">
+                  <a
+                    href="https://www.linkedin.com/in/pedro-lucas-reis-a93945171/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-lorenzo-text-light font-bold text-xl md:text-2xl uppercase hover:text-lorenzo-accent transition-colors inline-block leading-4"
+                  >
+                    LINKEDIN
+                  </a>
+                </li>
+                <li className="leading-5">
+                  <a
+                    href="https://www.youtube.com/@DevDesenvolvimento"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-lorenzo-text-light font-bold text-xl md:text-2xl uppercase hover:text-lorenzo-accent transition-colors inline-block leading-4"
+                  >
+                    YOUTUBE
+                  </a>
+                </li>
+                <li className="leading-5">
+                  <a
+                    href="https://github.com/PedroReoli"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-lorenzo-text-light font-bold text-xl md:text-2xl uppercase hover:text-lorenzo-accent transition-colors inline-block leading-4"
+                  >
+                    GITHUB
+                  </a>
+                </li>
               </ul>
             </div>
-          </div>
-
-          {/* Partners Row */}
-          {/* Added mb-8 to ensure logos don't touch the bottom edge of the mask */}
-          <div className="border-lorenzo-text-light/10 border-t-0 mb-0 mt-32 pt-0">
-            <InfiniteLogoSlider />
           </div>
         </div>
       </div>
@@ -145,15 +163,7 @@ export default function Footer() {
       {/* Wrapped in max-w container to align perfectly with the card above */}
       <div className="w-full max-w-[1688px] mx-auto px-8 md:px-12 relative z-20 pt-0">
         <div className="flex flex-col md:flex-row justify-between items-center text-lorenzo-dark text-xs font-bold tracking-wider uppercase">
-          <p>© 2025 PedroReis1/1. All rights reserved</p>
-          <div className="flex gap-6 mt-2 md:mt-0">
-            <a href="#" className="hover:opacity-60 transition-opacity">
-              PRIVACY POLICY
-            </a>
-            <a href="#" className="hover:opacity-60 transition-opacity">
-              TERMS
-            </a>
-          </div>
+          <p>© {currentYear} Pedro Reis. Todos os direitos reservados.</p>
         </div>
       </div>
 

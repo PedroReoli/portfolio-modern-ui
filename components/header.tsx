@@ -33,9 +33,9 @@ export default function Header() {
         }
       }
 
-      const helmets = document.getElementById("helmets")
-      if (helmets) {
-        const rect = helmets.getBoundingClientRect()
+      const technologies = document.getElementById("technologies")
+      if (technologies) {
+        const rect = technologies.getBoundingClientRect()
         if (rect.top <= headerOffset && rect.bottom > headerOffset) {
           newColor = "white"
         }
@@ -95,7 +95,7 @@ export default function Header() {
                 logoColor === "white" ? "text-white" : "text-lorenzo-dark"
               }`}
             >
-              PEDROREIS1/1
+              PEDRO REIS
             </h1>
           </motion.div>
 
@@ -139,7 +139,7 @@ export default function Header() {
               className="text-center"
             >
               <motion.ul className="space-y-6 text-4xl md:text-6xl font-black uppercase text-white">
-                {["HOME", "MISSION", "GALLERY", "HELMETS", "STORE", "CONTACT"].map((item, index) => (
+                {["INÍCIO", "MISSÃO", "GALERIA", "TECNOLOGIAS"].map((item, index) => (
                   <motion.li
                     key={item}
                     variants={{
@@ -148,7 +148,7 @@ export default function Header() {
                     }}
                   >
                     <a
-                      href={`#${item.toLowerCase()}`}
+                      href={item === "INÍCIO" ? "#" : item === "TECNOLOGIAS" ? "#technologies" : `#${item.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, "-")}`}
                       className="inline-block hover:text-lorenzo-accent transition-colors duration-300 hover:scale-110 transform"
                       onClick={() => setMenuOpen(false)}
                     >
@@ -165,16 +165,33 @@ export default function Header() {
                 }}
                 className="mt-12 flex justify-center gap-6"
               >
-                {["INSTAGRAM", "TIKTOK", "YOUTUBE"].map((social) => (
-                  <motion.a
-                    key={social}
-                    whileHover={{ scale: 1.1, color: "#057AF3" }}
-                    href="#"
-                    className="text-sm font-bold text-white/60 hover:text-lorenzo-accent transition-colors"
-                  >
-                    {social}
-                  </motion.a>
-                ))}
+                <motion.a
+                  whileHover={{ scale: 1.1, color: "#057AF3" }}
+                  href="https://www.instagram.com/domus_pedroreoli/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm font-bold text-white/60 hover:text-lorenzo-accent transition-colors"
+                >
+                  INSTAGRAM
+                </motion.a>
+                <motion.a
+                  whileHover={{ scale: 1.1, color: "#057AF3" }}
+                  href="https://www.youtube.com/@DevDesenvolvimento"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm font-bold text-white/60 hover:text-lorenzo-accent transition-colors"
+                >
+                  YOUTUBE
+                </motion.a>
+                <motion.a
+                  whileHover={{ scale: 1.1, color: "#057AF3" }}
+                  href="https://github.com/PedroReoli"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm font-bold text-white/60 hover:text-lorenzo-accent transition-colors"
+                >
+                  GITHUB
+                </motion.a>
               </motion.div>
             </motion.nav>
           </motion.div>

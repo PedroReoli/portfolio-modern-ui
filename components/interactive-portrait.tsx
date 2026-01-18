@@ -60,7 +60,7 @@ export default function InteractivePortrait({ isInteractive = true }: Interactiv
           pointer: { value: new THREE.Vector2().setScalar(10) },
           pointerDown: { value: isInteractive ? 1 : 0 },
           pointerRadius: { value: 0.35 },
-          pointerDuration: { value: 2.5 },
+          pointerDuration: { value: 1.0 }, // Duração inicial mais curta
         }
 
         const handleMouseMove = (event: MouseEvent) => {
@@ -342,9 +342,11 @@ export default function InteractivePortrait({ isInteractive = true }: Interactiv
         if (progress >= 1.0) {
           animationCompleted = true
           autoAnimationActive = false
-          // Após a animação, limpar o blob para mostrar hero-on completamente
+          // Após a animação, limpar o blob rapidamente para mostrar hero-on
           blob.uniforms.pointerDown.value = 0
           blob.uniforms.pointer.value.setScalar(10)
+          // Reduzir drasticamente a duração para o blob desaparecer rápido
+          blob.uniforms.pointerDuration.value = 0.5 // Muito mais rápido para desaparecer
           // Garantir que hero-off permaneça oculto e hero-on apareça
           helmetImage.visible = false
           baseImage.visible = true
@@ -374,8 +376,8 @@ export default function InteractivePortrait({ isInteractive = true }: Interactiv
           // Começa com raio normal e aumenta para cobrir toda a imagem
           blob.uniforms.pointerRadius.value = 0.35 + (progress * 1.2) // Aumenta o raio significativamente
           
-          // Aumentar a duração do efeito para deixar a marca mais tempo
-          blob.uniforms.pointerDuration.value = 3.0 + (progress * 2.0)
+          // Manter duração curta durante a animação para não demorar muito depois
+          blob.uniforms.pointerDuration.value = 0.8 + (progress * 0.5) // Mais curto durante animação
         }
       } else if (isInteractive) {
         // Resetar animação quando voltar a ser interativo
@@ -383,7 +385,7 @@ export default function InteractivePortrait({ isInteractive = true }: Interactiv
         animationCompleted = false
         autoAnimationActive = false
         blob.uniforms.pointerRadius.value = 0.35
-        blob.uniforms.pointerDuration.value = 2.5
+        blob.uniforms.pointerDuration.value = 1.0
         // Mostrar helmetImage novamente quando voltar a ser interativo
         helmetImage.visible = true
         baseImage.visible = true

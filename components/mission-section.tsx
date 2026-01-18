@@ -71,7 +71,7 @@ export default function MissionSection() {
               <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
               <path d="M8 12l2 2 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
             </svg>
-            <span className="text-sm font-bold uppercase tracking-wider">TEAM LORENZO SINCE 2020</span>
+            <span className="text-sm font-bold uppercase tracking-wider">PEDROREIS1/1 DESDE 2020</span>
           </div>
         </div>
         */}
@@ -85,19 +85,14 @@ export default function MissionSection() {
         
         <div className="text-center">
           <h2 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight text-balance leading-[1.1] xl:text-8xl">
-            <span className="text-lorenzo-accent font-brier leading-[1.1] text-8xl">REDEFINING</span> LIMITS,
+            <span className="text-lorenzo-accent font-brier leading-[1.1] text-8xl">REDEFININDO</span> LIMITES,
             <br />
-            FIGHTING FOR <span className="text-lorenzo-accent font-brier leading-[1.1]">VICTORIES</span>,
+            CRIANDO <span className="text-lorenzo-accent font-brier leading-[1.1]">SOLUÇÕES</span>,
             <br />
-            BRINGING EVERYTHING IN
+            TRANSFORMANDO IDEIAS
             <br />
-            EVERY SENSE.
-            <br />
-            DEFINING A <span className="text-lorenzo-accent font-brier leading-[1.1]">LEGACY</span>
-            <br />
-            IN MOTOCROSS
-            <br />
-            ON AND OFF THE TRACK.
+            EM <span className="text-lorenzo-accent font-brier leading-[1.1]">EXPERIÊNCIAS REAIS</span>.
+           
           </h2>
         </div>
 
@@ -109,7 +104,7 @@ export default function MissionSection() {
             <motion.path
               d="M30,75 Q60,40 110,75 T220,75 Q250,95 310,65 Q340,45 370,75 M200,90 Q220,110 250,90"
               fill="none"
-              stroke="#c8f550"
+              stroke="#057AF3"
               strokeWidth="4"
               strokeLinecap="round"
               strokeLinejoin="round"

@@ -5,14 +5,14 @@
 
 :root {
   --darkcinzabg: #111112;
-  --lorenzo-dark: #282c20;
-  --lorenzo-darkbk: #282c20;
+  --lorenzo-dark: #0a1a2e;
+  --lorenzo-darkbk: #0a1a2e;
   --lorenzo-light: #e8e8e3;
-  --lorenzo-accent: #c8f550;
+  --lorenzo-accent: #057AF3;
   --lorenzo-text-dark: #000000;
   --lorenzo-text-light: #ffffff;
-  --verdetitulo: #282c20;
-  --background: #282c20;
+  --verdetitulo: #0a1a2e;
+  --background: #0a1a2e;
   /* --background: oklch(0.92 0.01 80); */
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -238,7 +238,7 @@
 }
 
 .simteste {
-  color: #c8f550;
+  color: #057AF3;
   font-size: 1050px;
   line-height: 600px;
 }

@@ -5,7 +5,11 @@
 import { useEffect, useRef } from "react"
 import * as THREE from "three"
 
-export default function InteractivePortrait() {
+interface InteractivePortraitProps {
+  isInteractive?: boolean
+}
+
+export default function InteractivePortrait({ isInteractive = true }: InteractivePortraitProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null)
   const animationFrameRef = useRef<number>()
@@ -54,23 +58,40 @@ export default function InteractivePortrait() {
         this.rtOutput = new THREE.WebGLRenderTarget(width, height)
         this.uniforms = {
           pointer: { value: new THREE.Vector2().setScalar(10) },
-          pointerDown: { value: 1 },
+          pointerDown: { value: isInteractive ? 1 : 0 },
           pointerRadius: { value: 0.35 },
           pointerDuration: { value: 2.5 },
         }
 
         const handleMouseMove = (event: MouseEvent) => {
+          if (!isInteractive) {
+            this.uniforms.pointer.value.setScalar(10)
+            this.uniforms.pointerDown.value = 0
+            return
+          }
           const rect = container.getBoundingClientRect()
           this.uniforms.pointer.value.x = ((event.clientX - rect.left) / width) * 2 - 1
           this.uniforms.pointer.value.y = -((event.clientY - rect.top) / height) * 2 + 1
+          this.uniforms.pointerDown.value = 1
         }
 
         const handleMouseLeave = () => {
           this.uniforms.pointer.value.setScalar(10)
+          if (isInteractive) {
+            this.uniforms.pointerDown.value = 1
+          } else {
+            this.uniforms.pointerDown.value = 0
+          }
         }
 
         container.addEventListener("mousemove", handleMouseMove)
         container.addEventListener("mouseleave", handleMouseLeave)
+        
+        // Atualizar pointerDown quando isInteractive mudar
+        if (!isInteractive) {
+          this.uniforms.pointerDown.value = 0
+          this.uniforms.pointer.value.setScalar(10)
+        }
 
         this.rtScene = new THREE.Mesh(
           new THREE.PlaneGeometry(2, 2),
@@ -137,9 +158,15 @@ export default function InteractivePortrait() {
     }
 
     const blob = new Blob(renderer)
+    
+    // Controle para animação automática
+    let autoAnimationTime = 0
+    let autoAnimationActive = false
+    let animationCompleted = false
 
     const textureLoader = new THREE.TextureLoader()
-    const baseTexture = textureLoader.load("/images/hero-off.png", (texture) => {
+    // Usando hero-on como imagem principal
+    const baseTexture = textureLoader.load("/images/hero-on.png", (texture) => {
       const img = texture.image
       const imgAspect = img.width / img.height
       const containerAspect = width / height
@@ -157,16 +184,18 @@ export default function InteractivePortrait() {
       helmetImage.geometry = new THREE.PlaneGeometry(planeWidth, planeHeight)
     })
 
-    const helmetTexture = textureLoader.load("/images/hero-on.png")
+    // hero-off como imagem secundária (que aparece com a interação)
+    const helmetTexture = textureLoader.load("/images/hero-off.png")
 
     baseTexture.colorSpace = THREE.SRGBColorSpace
     helmetTexture.colorSpace = THREE.SRGBColorSpace
 
     const baseImageMaterial = new THREE.MeshBasicMaterial({ map: baseTexture, transparent: true, alphaTest: 0.0 })
     const baseImage = new THREE.Mesh(new THREE.PlaneGeometry(width, height), baseImageMaterial)
+    baseImage.visible = true // hero-on sempre visível por padrão
     scene.add(baseImage)
 
-    const bgPlaneMaterial = new THREE.MeshBasicMaterial({ color: 0x1a1f1a, transparent: true })
+    const bgPlaneMaterial = new THREE.MeshBasicMaterial({ color: 0x0a1a2e, transparent: true })
     bgPlaneMaterial.defines = { USE_UV: "" }
 
     bgPlaneMaterial.onBeforeCompile = (shader) => {
@@ -276,11 +305,18 @@ export default function InteractivePortrait() {
     }
 
     const helmetImage = new THREE.Mesh(new THREE.PlaneGeometry(width, height), helmetImageMaterial)
+    helmetImage.visible = false // hero-off começa oculto, só aparece com interação
     scene.add(helmetImage)
 
+    // hero-on como base (sempre visível), hero-off aparece apenas com interação
     baseImage.position.z = 0.0
     bgPlane.position.z = 0.05
     helmetImage.position.z = 0.1
+    
+    // Inicialmente, hero-off está oculto
+    if (!isInteractive) {
+      helmetImage.visible = false
+    }
 
     const clock = new THREE.Clock()
     let t = 0
@@ -290,6 +326,80 @@ export default function InteractivePortrait() {
       t += dt
       gu.time.value = t
       gu.dTime.value = dt
+      
+      // Animação automática quando não for interativo
+      if (!isInteractive && !animationCompleted) {
+        autoAnimationActive = true
+        autoAnimationTime += dt
+        
+        // Duração da animação (1.0 segundo - mais rápida)
+        const animationDuration = 1.0
+        const progress = Math.min(autoAnimationTime / animationDuration, 1.0)
+        
+        // Ocultar hero-off durante toda a animação - nunca mostrar
+        helmetImage.visible = false
+        
+        if (progress >= 1.0) {
+          animationCompleted = true
+          autoAnimationActive = false
+          // Após a animação, limpar o blob para mostrar hero-on completamente
+          blob.uniforms.pointerDown.value = 0
+          blob.uniforms.pointer.value.setScalar(10)
+          // Garantir que hero-off permaneça oculto e hero-on apareça
+          helmetImage.visible = false
+          baseImage.visible = true
+        } else {
+          // Criar uma animação que "varre" toda a imagem de forma sistemática
+          // Padrão em espiral que cobre toda a área da imagem
+          
+          // Usar um padrão em espiral que se expande do centro
+          const spiralTurns = 3 // Número de voltas da espiral
+          const angle = progress * Math.PI * 2 * spiralTurns
+          const radius = progress * 1.8 // Expandir do centro até cobrir toda a área
+          
+          // Calcular posição na espiral
+          const spiralX = Math.cos(angle) * radius
+          const spiralY = Math.sin(angle) * radius
+          
+          // Adicionar variação para cobrir melhor a área
+          const waveOffset = Math.sin(progress * Math.PI * 4) * 0.3
+          const finalX = spiralX + waveOffset
+          const finalY = spiralY + waveOffset
+          
+          blob.uniforms.pointer.value.x = finalX
+          blob.uniforms.pointer.value.y = finalY
+          blob.uniforms.pointerDown.value = 1
+          
+          // Aumentar o raio do pointer durante a animação para cobrir mais área
+          // Começa com raio normal e aumenta para cobrir toda a imagem
+          blob.uniforms.pointerRadius.value = 0.35 + (progress * 1.2) // Aumenta o raio significativamente
+          
+          // Aumentar a duração do efeito para deixar a marca mais tempo
+          blob.uniforms.pointerDuration.value = 3.0 + (progress * 2.0)
+        }
+      } else if (isInteractive) {
+        // Resetar animação quando voltar a ser interativo
+        autoAnimationTime = 0
+        animationCompleted = false
+        autoAnimationActive = false
+        blob.uniforms.pointerRadius.value = 0.35
+        blob.uniforms.pointerDuration.value = 2.5
+        // Mostrar helmetImage novamente quando voltar a ser interativo
+        helmetImage.visible = true
+        baseImage.visible = true
+      }
+      
+      // Garantir visibilidade baseada no estado
+      if (!isInteractive) {
+        // Durante animação ou após completar, hero-off não aparece
+        helmetImage.visible = false
+        baseImage.visible = true
+      } else if (isInteractive) {
+        // Quando interativo, hero-off pode aparecer com interação
+        helmetImage.visible = true
+        baseImage.visible = true
+      }
+      
       blob.render()
       renderer.render(scene, camera)
       animationFrameRef.current = requestAnimationFrame(animate)
@@ -354,12 +464,21 @@ export default function InteractivePortrait() {
       helmetTexture.dispose()
       blob.rtOutput.dispose()
     }
-  }, [])
+  }, [isInteractive])
+  
+  // Resetar animação quando isInteractive mudar
+  useEffect(() => {
+    if (isInteractive) {
+      // Resetar quando voltar a ser interativo
+      const blobInstance = containerRef.current?.querySelector("canvas")?.dataset?.blobInstance
+      // A lógica de reset é feita dentro do animate
+    }
+  }, [isInteractive])
 
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 w-full h-full bg-[#1a1f1a] cursor-crosshair overflow-hidden"
+      className={`fixed inset-0 w-full h-full bg-[#0a1a2e] overflow-hidden ${isInteractive ? "cursor-crosshair" : "cursor-default"}`}
       style={{ touchAction: "none" }}
     >
       <img

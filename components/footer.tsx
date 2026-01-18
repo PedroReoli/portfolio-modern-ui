@@ -1,20 +1,17 @@
 "use client"
 
-import { Suspense } from "react"
-import { Canvas } from "@react-three/fiber"
-import { Environment, PerspectiveCamera } from "@react-three/drei"
+import dynamic from "next/dynamic"
 import { motion } from "framer-motion"
-import Helmet3DModel from "./helmet-3d-model"
 import InfiniteLogoSlider from "./infinite-logo-slider"
 
-function LoadingFallback() {
-  return (
-    <mesh>
-      <sphereGeometry args={[1.5, 16, 16]} />
-      <meshStandardMaterial color="#1a1f1a" wireframe />
-    </mesh>
-  )
-}
+const HelmetCanvas = dynamic(() => import("./helmet-canvas").then((mod) => mod.default), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-full flex items-center justify-center">
+      <div className="w-32 h-32 border-4 border-lorenzo-accent border-t-transparent rounded-full animate-spin" />
+    </div>
+  ),
+})
 
 export default function Footer() {
   return (
@@ -98,16 +95,7 @@ export default function Footer() {
 
               {/* 3D Helmet */}
               <div className="relative w-full h-[300px] md:h-[500px] z-10 mt-24 md:mt-24">
-                <Canvas>
-                  <PerspectiveCamera makeDefault position={[0, 0, 6.5]} />
-                  <ambientLight intensity={0.8} />
-                  <directionalLight position={[10, 10, 5]} intensity={1.5} />
-                  <pointLight position={[-10, -10, -5]} intensity={0.8} color="#CFFF04" />
-                  <Suspense fallback={<LoadingFallback />}>
-                    <Helmet3DModel modelPath="/3d/helmet-lorenzo.glb" />
-                  </Suspense>
-                  <Environment preset="city" />
-                </Canvas>
+                <HelmetCanvas />
               </div>
 
               {/* CTA Button - Adjusted bottom position to be closer to helmet */}
@@ -157,7 +145,7 @@ export default function Footer() {
       {/* Wrapped in max-w container to align perfectly with the card above */}
       <div className="w-full max-w-[1688px] mx-auto px-8 md:px-12 relative z-20 pt-0">
         <div className="flex flex-col md:flex-row justify-between items-center text-lorenzo-dark text-xs font-bold tracking-wider uppercase">
-          <p>© 2025 Lorenzo. All rights reserved</p>
+          <p>© 2025 PedroReis1/1. All rights reserved</p>
           <div className="flex gap-6 mt-2 md:mt-0">
             <a href="#" className="hover:opacity-60 transition-opacity">
               PRIVACY POLICY
@@ -172,11 +160,7 @@ export default function Footer() {
       <div className="w-full max-w-[1688px] mx-auto px-8 md:px-12 relative z-20 pt-0">
         <div className="flex flex-col md:flex-row justify-between items-center text-lorenzo-dark text-xs font-bold tracking-wider uppercase">
           <p className="text-xs mt-7 opacity-40 font-medium leading-4 text-left">
-            This project was developed by Tulio Portela and is not a real project. Inspired by the website of racing
-            driver Lando Norris. Lorenzo does not exist. It is pure inspiration (and homage) to the real driver Lorenzo,
-            son of the advertising genius and my great friend, Adan Cardoso. Most of the images were made with Nano; if
-            it's not good, complain to that 'banana'! Brands, visual identity, applications, it's all a product of my
-            imagination and nothing is real. I do not have authorization from the brands; this is a fictional project.
+            Portfolio de Pedro Reis - Desenvolvedor e Designer. Criando soluções tecnológicas que transformam ideias em experiências reais.
           </p>
         </div>
       </div>

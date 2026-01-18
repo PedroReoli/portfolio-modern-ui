@@ -74,7 +74,7 @@ export default function BikeShowcase() {
 
               {/* Author attribution */}
               <div className="mt-4">
-                <p className="text-base font-medium font-mono md:text-lg text-accent">- Lorenzo Cardoso</p>
+                <p className="text-base font-medium font-mono md:text-lg text-accent">- Pedro Reis</p>
               </div>
             </div>
           </div>
@@ -87,10 +87,10 @@ export default function BikeShowcase() {
             className="relative w-full aspect-[4/5] md:aspect-square max-w-lg mx-auto lg:mx-0 order-1 lg:order-2"
           >
             {/* Decorative Corners (Green brackets) 
-            <div className="absolute -top-4 -left-4 w-16 h-16 border-t-4 border-l-4 border-[#CFFF04] rounded-tl-3xl z-20" />
-            <div className="absolute -top-4 -right-4 w-16 h-16 border-t-4 border-r-4 border-[#CFFF04] rounded-tr-3xl z-20" />
-            <div className="absolute -bottom-4 -left-4 w-16 h-16 border-b-4 border-l-4 border-[#CFFF04] rounded-bl-3xl z-20" />
-            <div className="absolute -bottom-4 -right-4 w-16 h-16 border-b-4 border-r-4 border-[#CFFF04] rounded-br-3xl z-20" />
+            <div className="absolute -top-4 -left-4 w-16 h-16 border-t-4 border-l-4 border-[#057AF3] rounded-tl-3xl z-20" />
+            <div className="absolute -top-4 -right-4 w-16 h-16 border-t-4 border-r-4 border-[#057AF3] rounded-tr-3xl z-20" />
+            <div className="absolute -bottom-4 -left-4 w-16 h-16 border-b-4 border-l-4 border-[#057AF3] rounded-bl-3xl z-20" />
+            <div className="absolute -bottom-4 -right-4 w-16 h-16 border-b-4 border-r-4 border-[#057AF3] rounded-br-3xl z-20" />
             */}
             <InteractiveClean />
           </motion.div>

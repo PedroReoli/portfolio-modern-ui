@@ -26,7 +26,7 @@ export default function Preloader() {
         <motion.div
           initial={{ y: 0 }}
           exit={{ y: "-100%", transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] } }}
-          className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#ccff00] text-black"
+          className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#057AF3] text-white"
         >
           <div className="relative flex items-center justify-center overflow-hidden">
             <motion.div
@@ -38,7 +38,7 @@ export default function Preloader() {
             {/*
               <span className="font-[family-name:var(--font-oswald)]">AD</span>
             */}
-              <span className="font-brier ml-1">LORENZO</span>
+              <span className="font-brier ml-1">PEDROREIS1/1</span>
 
               {/* Stylized 'n' above */}
               <motion.span

@@ -25,9 +25,9 @@ export default function SignatureMarqueeSection() {
             {[...Array(4)].map((_, i) => (
               <h2
                 key={i}
-                className="font-[family-name:var(--font-brier)] text-[12vw] md:text-[8vw] text-[#D1FF1C] leading-[0.9] tracking-tight px-4"
+                className="font-[family-name:var(--font-brier)] text-[12vw] md:text-[8vw] text-[#057AF3] leading-[0.9] tracking-tight px-4"
               >
-                REDEFINING LIMITS REDEFINING LIMITS REDEFINING LIMITS REDEFINING LIMITS
+                DESENVOLVIMENTO WEB REACT NEXT.JS TYPESCRIPT JAVASCRIPT DESENVOLVIMENTO WEB REACT NEXT.JS TYPESCRIPT JAVASCRIPT DESENVOLVIMENTO WEB REACT NEXT.JS TYPESCRIPT JAVASCRIPT
               </h2>
             ))}
           </motion.div>
@@ -53,7 +53,7 @@ export default function SignatureMarqueeSection() {
                 key={i}
                 className="font-[family-name:var(--font-oswald)] font-bold uppercase text-[12vw] md:text-[8vw] text-white leading-[0.9] tracking-tighter px-4"
               >
-                FIGHTING FOR VICTORIES FIGHTING FOR VICTORIES FIGHTING FOR VICTORIES FIGHTING FOR VICTORIES
+                UI/UX DESIGN FRONTEND BACKEND API REST NODE.JS UI/UX DESIGN FRONTEND BACKEND API REST NODE.JS UI/UX DESIGN FRONTEND BACKEND API REST NODE.JS UI/UX DESIGN FRONTEND BACKEND API REST NODE.JS
               </h2>
             ))}
           </motion.div>

@@ -95,7 +95,7 @@ export default function Header() {
                 logoColor === "white" ? "text-white" : "text-lorenzo-dark"
               }`}
             >
-              LORENZO
+              PEDROREIS1/1
             </h1>
           </motion.div>
 
@@ -168,7 +168,7 @@ export default function Header() {
                 {["INSTAGRAM", "TIKTOK", "YOUTUBE"].map((social) => (
                   <motion.a
                     key={social}
-                    whileHover={{ scale: 1.1, color: "#c8f550" }}
+                    whileHover={{ scale: 1.1, color: "#057AF3" }}
                     href="#"
                     className="text-sm font-bold text-white/60 hover:text-lorenzo-accent transition-colors"
                   >

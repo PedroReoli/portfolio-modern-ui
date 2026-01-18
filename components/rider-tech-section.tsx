@@ -200,14 +200,13 @@ export default function RiderTechSection() {
             <span className="block font-brier text-lorenzo-dark text-9xl">SPECS</span>
           </h2>
           <p className="text-base mt-6 max-w-2xl text-lorenzo-dark md:text-base">
-            Explore the technical specifications of Lorenzo's professional equipment. Hover over the points to discover
-            more.
+            Explore os projetos e tecnologias desenvolvidos por PedroReis1/1. Passe o mouse sobre os pontos para descobrir mais.
           </p>
         </div>
 
         <div className="relative max-w-6xl mx-auto">
           <div className="relative w-full aspect-[4/3] md:aspect-[3/2]">
-            <Image src="/images/lorenzo-pose33.jpg" alt="Lorenzo Tech Specs" fill className="object-contain" priority />
+            <Image src="/images/lorenzo-pose33.jpg" alt="Pedro Reis Tech Specs" fill className="object-contain" priority />
 
             {/* Hotspots overlay */}
             {hotspots.map((spot) => (

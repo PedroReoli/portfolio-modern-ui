@@ -75,8 +75,8 @@ export default function MasonryGallerySection() {
     offset: ["start start", "end end"],
   })
 
-  // Background transition: Dark Green -> Dark Green -> White
-  const backgroundColor = useTransform(scrollYProgress, [0, 0.6, 0.9], ["#282c20", "#ccc", "#ffffff"])
+  // Background transition: Dark Blue -> Gray -> White
+  const backgroundColor = useTransform(scrollYProgress, [0, 0.6, 0.9], ["#0a1a2e", "#ccc", "#ffffff"])
 
   // Y Movement: Move grid up to reveal all images
   // Starts at 0vh and moves up to -150vh to show bottom images

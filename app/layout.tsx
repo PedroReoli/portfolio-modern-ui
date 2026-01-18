@@ -3,7 +3,6 @@ import type { Metadata } from "next"
 import { Analytics } from "@vercel/analytics/next"
 import { Roboto, Libre_Baskerville, Alex_Brush, Oswald } from "next/font/google"
 import SmoothScroll from "@/components/smooth-scroll"
-import Preloader from "@/components/preloader"
 import "./globals.css"
 
 const roboto = Roboto({
@@ -68,7 +67,6 @@ export default function RootLayout({
       <body
         className={`font-sans antialiased ${roboto.variable} ${libreBaskerville.variable} ${alexBrush.variable} ${oswald.variable}`}
       >
-        <Preloader />
         <SmoothScroll>{children}</SmoothScroll>
         <Analytics />
       </body>

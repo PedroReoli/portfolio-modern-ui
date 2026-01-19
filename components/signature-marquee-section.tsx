@@ -25,7 +25,7 @@ export default function SignatureMarqueeSection() {
             {[...Array(4)].map((_, i) => (
               <h2
                 key={i}
-                className="font-[family-name:var(--font-brier)] text-[12vw] md:text-[8vw] text-[#057AF3] leading-[0.9] tracking-tight px-4"
+                className="font-[family-name:var(--font-brier)] text-[12vw] md:text-[8vw] text-[#C3271D] leading-[0.9] tracking-tight px-4"
               >
                 DESENVOLVIMENTO WEB REACT NEXT.JS TYPESCRIPT JAVASCRIPT DESENVOLVIMENTO WEB REACT NEXT.JS TYPESCRIPT JAVASCRIPT DESENVOLVIMENTO WEB REACT NEXT.JS TYPESCRIPT JAVASCRIPT
               </h2>

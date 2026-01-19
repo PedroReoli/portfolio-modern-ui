@@ -20,7 +20,7 @@ export default function PartnersSection() {
               <motion.path
                 d="M50,200 Q80,100 150,180 Q200,240 250,150 Q280,100 320,170 Q340,210 360,180"
                 fill="none"
-                stroke="#057AF3"
+                stroke="#C3271D"
                 strokeWidth="8"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -32,7 +32,7 @@ export default function PartnersSection() {
               <motion.path
                 d="M80,250 Q120,300 180,260 Q240,220 280,280"
                 fill="none"
-                stroke="#057AF3"
+                stroke="#C3271D"
                 strokeWidth="6"
                 strokeLinecap="round"
                 strokeLinejoin="round"

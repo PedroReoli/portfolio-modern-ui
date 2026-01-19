@@ -5,14 +5,18 @@
 
 :root {
   --darkcinzabg: #111112;
-  --lorenzo-dark: #0a1a2e;
-  --lorenzo-darkbk: #0a1a2e;
-  --lorenzo-light: #e8e8e3;
-  --lorenzo-accent: #057AF3;
+  --lorenzo-dark: #000000;
+  --lorenzo-darkbk: #000000;
+  --lorenzo-light: #ffffff;
+  --lorenzo-accent: #C3271D;
+  --lorenzo-accent-light: #E04A3D;
+  --lorenzo-accent-dark: #9D1F15;
+  --lorenzo-accent-lighter: #F06B5E;
+  --lorenzo-accent-darker: #7A170F;
   --lorenzo-text-dark: #000000;
   --lorenzo-text-light: #ffffff;
-  --verdetitulo: #0a1a2e;
-  --background: #0a1a2e;
+  --verdetitulo: #000000;
+  --background: #000000;
   /* --background: oklch(0.92 0.01 80); */
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -120,6 +124,10 @@
   --color-lorenzo-dark: var(--lorenzo-dark);
   --color-lorenzo-light: var(--lorenzo-light);
   --color-lorenzo-accent: var(--lorenzo-accent);
+  --color-lorenzo-accent-light: var(--lorenzo-accent-light);
+  --color-lorenzo-accent-dark: var(--lorenzo-accent-dark);
+  --color-lorenzo-accent-lighter: var(--lorenzo-accent-lighter);
+  --color-lorenzo-accent-darker: var(--lorenzo-accent-darker);
   --color-lorenzo-text-dark: var(--lorenzo-text-dark);
   --color-lorenzo-text-light: var(--lorenzo-text-light);
 
@@ -238,7 +246,7 @@
 }
 
 .simteste {
-  color: #057AF3;
+  color: #C3271D;
   font-size: 1050px;
   line-height: 600px;
 }

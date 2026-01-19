@@ -195,7 +195,7 @@ export default function InteractivePortrait({ isInteractive = true }: Interactiv
     baseImage.visible = true // hero-on sempre visível por padrão
     scene.add(baseImage)
 
-    const bgPlaneMaterial = new THREE.MeshBasicMaterial({ color: 0x0a1a2e, transparent: true })
+    const bgPlaneMaterial = new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true })
     bgPlaneMaterial.defines = { USE_UV: "" }
 
     bgPlaneMaterial.onBeforeCompile = (shader) => {
@@ -480,7 +480,7 @@ export default function InteractivePortrait({ isInteractive = true }: Interactiv
   return (
     <div
       ref={containerRef}
-      className={`fixed inset-0 w-full h-full bg-[#0a1a2e] overflow-hidden ${isInteractive ? "cursor-crosshair" : "cursor-default"}`}
+      className={`fixed inset-0 w-full h-full bg-[#000000] overflow-hidden ${isInteractive ? "cursor-crosshair" : "cursor-default"}`}
       style={{ touchAction: "none" }}
     >
       <img

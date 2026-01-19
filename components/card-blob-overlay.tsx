@@ -127,8 +127,8 @@ export default function CardBlobOverlay({ isHovered, className = "" }: CardBlobO
 
     const blob = new Blob(renderer)
 
-    // Background plane com shader - Azul escuro
-    const bgPlaneMaterial = new THREE.MeshBasicMaterial({ color: 0x0a1a2e, transparent: true })
+    // Background plane com shader - Preto
+    const bgPlaneMaterial = new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true })
     bgPlaneMaterial.defines = { USE_UV: "" }
 
     bgPlaneMaterial.onBeforeCompile = (shader) => {
@@ -168,7 +168,7 @@ export default function CardBlobOverlay({ isHovered, className = "" }: CardBlobO
         vec2 blobUV=((vPosProj.xy/vPosProj.w)+1.)*0.5;
         vec4 blobData=texture(texBlob,blobUV);
         if(blobData.r<0.02)discard;
-        diffuseColor.rgb = vec3(0.039, 0.102, 0.18); // Azul escuro #0a1a2e
+        diffuseColor.rgb = vec3(0.0, 0.0, 0.0); // Preto #000000
         #include <clipping_planes_fragment>
         `,
       )

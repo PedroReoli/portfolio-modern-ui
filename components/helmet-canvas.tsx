@@ -6,7 +6,7 @@ function LoadingFallback() {
   return (
     <mesh>
       <sphereGeometry args={[1.5, 16, 16]} />
-      <meshStandardMaterial color="#0a1a2e" wireframe />
+      <meshStandardMaterial color="#000000" wireframe />
     </mesh>
   )
 }
@@ -37,7 +37,7 @@ export default function HelmetCanvas() {
           <PerspectiveCamera makeDefault position={[0, 0, 6.5]} />
           <ambientLight intensity={0.8} />
           <directionalLight position={[10, 10, 5]} intensity={1.5} />
-          <pointLight position={[-10, -10, -5]} intensity={0.8} color="#057AF3" />
+          <pointLight position={[-10, -10, -5]} intensity={0.8} color="#C3271D" />
           <Suspense fallback={<LoadingFallback />}>
             <HelmetModel modelPath="/3d/helmet-lorenzo.glb" />
           </Suspense>
@@ -52,11 +52,7 @@ export default function HelmetCanvas() {
   }, [])
 
   if (!isMounted || !CanvasComponent) {
-    return (
-      <div className="w-full h-full flex items-center justify-center">
-        <div className="w-32 h-32 border-4 border-lorenzo-accent border-t-transparent rounded-full animate-spin" />
-      </div>
-    )
+    return null
   }
 
   return <CanvasComponent />

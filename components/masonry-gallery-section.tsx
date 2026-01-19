@@ -59,16 +59,15 @@ export default function MasonryGallerySection() {
     offset: ["start start", "end end"],
   })
 
-  // Background transition: Dark Blue -> Gray -> White
-  const backgroundColor = useTransform(scrollYProgress, [0, 0.6, 0.9], ["#0a1a2e", "#ccc", "#ffffff"])
+  // Background transition: Black -> Gray -> White
+  const backgroundColor = useTransform(scrollYProgress, [0, 0.6, 0.9], ["#000000", "#ccc", "#ffffff"])
 
   // Y Movement: Move grid up to reveal all images
   // Starts at 0vh and moves up to -100vh to show bottom images
   const y = useTransform(scrollYProgress, [0, 1], ["0vh", "-100vh"])
 
-  const column1 = galleryImages.filter((_, i) => i % 3 === 0)
-  const column2 = galleryImages.filter((_, i) => i % 3 === 1)
-  const column3 = galleryImages.filter((_, i) => i % 3 === 2)
+  const column1 = galleryImages.filter((_, i) => i % 2 === 0)
+  const column2 = galleryImages.filter((_, i) => i % 2 === 1)
 
   return (
     <section
@@ -94,25 +93,18 @@ export default function MasonryGallerySection() {
             </h2>
           </motion.div>
           
-          <div className="flex flex-col md:flex-row gap-8 w-full">
+          <div className="flex flex-col md:flex-row gap-8 md:gap-10 w-full">
             {/* Column 1 */}
-            <div className="flex flex-col gap-8 w-full md:w-1/3">
+            <div className="flex flex-col gap-8 md:gap-10 w-full md:w-1/2">
               {column1.map((image, index) => (
-                <MasonryCard key={`col1-${index}`} image={image} index={index * 3} />
+                <MasonryCard key={`col1-${index}`} image={image} index={index * 2} />
               ))}
             </div>
 
             {/* Column 2 */}
-            <div className="flex flex-col gap-8 w-full md:w-1/3">
+            <div className="flex flex-col gap-8 md:gap-10 w-full md:w-1/2">
               {column2.map((image, index) => (
-                <MasonryCard key={`col2-${index}`} image={image} index={index * 3 + 1} />
-              ))}
-            </div>
-
-            {/* Column 3 */}
-            <div className="flex flex-col gap-8 w-full md:w-1/3">
-              {column3.map((image, index) => (
-                <MasonryCard key={`col3-${index}`} image={image} index={index * 3 + 2} />
+                <MasonryCard key={`col2-${index}`} image={image} index={index * 2 + 1} />
               ))}
             </div>
           </div>
@@ -137,14 +129,14 @@ function MasonryCard({ image, index }: { image: any; index: number }) {
         onHoverStart={() => setIsHovered(true)}
         onHoverEnd={() => setIsHovered(false)}
         className="group relative overflow-hidden rounded-2xl bg-black shadow-xl hover:shadow-2xl transition-all duration-500 w-full cursor-pointer border border-gray-800/50 hover:border-lorenzo-accent/60"
-        style={{ aspectRatio: "16 / 9" }}
+        style={{ aspectRatio: "21 / 9" }}
       >
         <Image
           src={image.src || "/placeholder.svg"}
           alt={image.alt}
           fill
-          className="object-cover transition-transform duration-700 group-hover:scale-110"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.02]"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
           quality={95}
         />
         
@@ -159,13 +151,13 @@ function MasonryCard({ image, index }: { image: any; index: number }) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 20 }}
               transition={{ duration: 0.3 }}
-              className="absolute inset-0 z-20 flex flex-col justify-end p-6 md:p-8 pointer-events-none"
+              className="absolute inset-0 z-20 flex flex-col justify-end p-8 md:p-10 pointer-events-none"
             >
               <div className="relative z-30 text-white">
-                <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4 font-oswald uppercase tracking-wide drop-shadow-lg">
+                <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-4 md:mb-5 font-oswald uppercase tracking-wide drop-shadow-lg">
                   {image.title}
                 </h3>
-                <p className="text-sm md:text-base leading-relaxed opacity-90 drop-shadow-md max-w-2xl">
+                <p className="text-sm md:text-base lg:text-lg leading-relaxed opacity-90 drop-shadow-md max-w-2xl">
                   {image.description}
                 </p>
               </div>

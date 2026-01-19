@@ -139,20 +139,43 @@ export default function Header() {
               className="text-center"
             >
               <motion.ul className="space-y-6 text-4xl md:text-6xl font-black uppercase text-white">
-                {["INÍCIO", "MISSÃO", "GALERIA", "TECNOLOGIAS"].map((item, index) => (
+                {[
+                  { label: "INÍCIO", href: "#" },
+                  { label: "MISSÃO", href: "#mission" },
+                  { label: "GALERIA", href: "#masonry-gallery" },
+                  { label: "TECNOLOGIAS", href: "#technologies" },
+                ].map((item, index) => (
                   <motion.li
-                    key={item}
+                    key={item.label}
                     variants={{
                       open: { opacity: 1, y: 0, rotate: 0 },
                       closed: { opacity: 0, y: 20, rotate: -5 },
                     }}
                   >
                     <a
-                      href={item === "INÍCIO" ? "#" : item === "TECNOLOGIAS" ? "#technologies" : `#${item.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, "-")}`}
+                      href={item.href}
                       className="inline-block hover:text-lorenzo-accent transition-colors duration-300 hover:scale-110 transform"
-                      onClick={() => setMenuOpen(false)}
+                      onClick={(e) => {
+                        e.preventDefault()
+                        setMenuOpen(false)
+                        const target = document.querySelector(item.href)
+                        if (target) {
+                          const headerOffset = 80
+                          const elementPosition = target.getBoundingClientRect().top
+                          const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+                          window.scrollTo({
+                            top: offsetPosition,
+                            behavior: "smooth",
+                          })
+                        } else if (item.href === "#") {
+                          window.scrollTo({
+                            top: 0,
+                            behavior: "smooth",
+                          })
+                        }
+                      }}
                     >
-                      {item}
+                      {item.label}
                     </a>
                   </motion.li>
                 ))}
@@ -166,7 +189,7 @@ export default function Header() {
                 className="mt-12 flex justify-center gap-6"
               >
                 <motion.a
-                  whileHover={{ scale: 1.1, color: "#057AF3" }}
+                  whileHover={{ scale: 1.1, color: "#C3271D" }}
                   href="https://www.instagram.com/domus_pedroreoli/"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -175,7 +198,7 @@ export default function Header() {
                   INSTAGRAM
                 </motion.a>
                 <motion.a
-                  whileHover={{ scale: 1.1, color: "#057AF3" }}
+                  whileHover={{ scale: 1.1, color: "#C3271D" }}
                   href="https://www.youtube.com/@DevDesenvolvimento"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -184,7 +207,7 @@ export default function Header() {
                   YOUTUBE
                 </motion.a>
                 <motion.a
-                  whileHover={{ scale: 1.1, color: "#057AF3" }}
+                  whileHover={{ scale: 1.1, color: "#C3271D" }}
                   href="https://github.com/PedroReoli"
                   target="_blank"
                   rel="noopener noreferrer"

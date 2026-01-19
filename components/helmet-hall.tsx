@@ -240,10 +240,10 @@ export default function HelmetHall() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5 }}
-              className="space-y-12"
+              className="space-y-8"
             >
               {groupedStack.map((group, groupIndex) => (
-                <div key={group.category} className="space-y-6">
+                <div key={group.category} className="space-y-4">
                   <motion.h3
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -253,7 +253,7 @@ export default function HelmetHall() {
                   >
                     {group.category}
                   </motion.h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-3">
                     {group.items.map((tech, index) => {
                       const IconComponent = getIcon(tech.iconType)
                       return (
@@ -266,10 +266,10 @@ export default function HelmetHall() {
                           whileHover={{ scale: 1.02, y: -3 }}
                           className="group relative cursor-pointer"
                         >
-                          <div className="relative overflow-hidden rounded-xl bg-[#0a0a0a] border-2 border-gray-800 group-hover:border-lorenzo-accent group-hover:shadow-xl group-hover:shadow-lorenzo-accent/20 transition-all duration-300 p-4 md:p-5">
-                            <div className="flex items-center gap-3 mb-2">
-                              <IconComponent className="text-xl md:text-2xl text-white/70 group-hover:text-lorenzo-accent transition-colors duration-300 shrink-0" />
-                              <h4 className="text-base md:text-lg font-bold text-white group-hover:text-lorenzo-accent transition-colors duration-300">
+                          <div className="relative overflow-hidden rounded-xl bg-[#0a0a0a] border-2 border-gray-800 group-hover:border-lorenzo-accent group-hover:shadow-xl group-hover:shadow-lorenzo-accent/20 transition-all duration-300 p-3 md:p-4">
+                            <div className="flex items-center gap-2">
+                              <IconComponent className="text-lg md:text-xl text-white/70 group-hover:text-lorenzo-accent transition-colors duration-300 shrink-0" />
+                              <h4 className="text-sm md:text-base font-bold text-white group-hover:text-lorenzo-accent transition-colors duration-300">
                                 {tech.name}
                               </h4>
                             </div>
@@ -290,10 +290,10 @@ export default function HelmetHall() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5 }}
-              className="space-y-12"
+              className="space-y-8"
             >
               {groupedCompetencies.map((group, groupIndex) => (
-                <div key={group.category} className="space-y-6">
+                <div key={group.category} className="space-y-4">
                   <motion.h3
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -303,7 +303,7 @@ export default function HelmetHall() {
                   >
                     {group.category}
                   </motion.h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-3">
                     {group.items.map((item, index) => (
                       <motion.div
                         key={item.name}
@@ -314,8 +314,8 @@ export default function HelmetHall() {
                         whileHover={{ scale: 1.02, y: -3 }}
                         className="group relative cursor-pointer"
                       >
-                        <div className="relative overflow-hidden rounded-xl bg-[#0a0a0a] border-2 border-gray-800 group-hover:border-lorenzo-accent group-hover:shadow-xl group-hover:shadow-lorenzo-accent/20 transition-all duration-300 p-4 md:p-5">
-                          <h4 className="text-base md:text-lg font-bold text-white mb-2 group-hover:text-lorenzo-accent transition-colors duration-300">
+                        <div className="relative overflow-hidden rounded-xl bg-[#0a0a0a] border-2 border-gray-800 group-hover:border-lorenzo-accent group-hover:shadow-xl group-hover:shadow-lorenzo-accent/20 transition-all duration-300 p-3 md:p-4">
+                          <h4 className="text-sm md:text-base font-bold text-white mb-1 group-hover:text-lorenzo-accent transition-colors duration-300">
                             {item.name}
                           </h4>
                           <p className="text-xs md:text-sm text-white/60 group-hover:text-white/80 transition-colors duration-300 leading-relaxed">

@@ -86,11 +86,11 @@ export default function BikeShowcase() {
             viewport={{ once: true }}
             className="relative w-full aspect-[4/5] md:aspect-square max-w-lg mx-auto lg:mx-0 order-1 lg:order-2"
           >
-            {/* Decorative Corners (Green brackets) 
-            <div className="absolute -top-4 -left-4 w-16 h-16 border-t-4 border-l-4 border-[#057AF3] rounded-tl-3xl z-20" />
-            <div className="absolute -top-4 -right-4 w-16 h-16 border-t-4 border-r-4 border-[#057AF3] rounded-tr-3xl z-20" />
-            <div className="absolute -bottom-4 -left-4 w-16 h-16 border-b-4 border-l-4 border-[#057AF3] rounded-bl-3xl z-20" />
-            <div className="absolute -bottom-4 -right-4 w-16 h-16 border-b-4 border-r-4 border-[#057AF3] rounded-br-3xl z-20" />
+            {/* Decorative Corners (Red brackets) 
+            <div className="absolute -top-4 -left-4 w-16 h-16 border-t-4 border-l-4 border-[#C3271D] rounded-tl-3xl z-20" />
+            <div className="absolute -top-4 -right-4 w-16 h-16 border-t-4 border-r-4 border-[#C3271D] rounded-tr-3xl z-20" />
+            <div className="absolute -bottom-4 -left-4 w-16 h-16 border-b-4 border-l-4 border-[#C3271D] rounded-bl-3xl z-20" />
+            <div className="absolute -bottom-4 -right-4 w-16 h-16 border-b-4 border-r-4 border-[#C3271D] rounded-br-3xl z-20" />
             */}
             <InteractiveClean />
           </motion.div>

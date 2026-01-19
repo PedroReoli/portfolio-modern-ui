@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import Image from "next/image"
 import { useState, useEffect } from "react"
+import { FaWhatsapp, FaEnvelope, FaYoutube, FaInstagram, FaLinkedin, FaGithub } from "react-icons/fa"
 
 const socialImages = [
   "/images/lofan/lofan2.jpg",
@@ -119,26 +120,26 @@ export default function SocialSection() {
           viewport={{ once: true }}
           className="text-center space-y-6"
         >
-          <div className="flex flex-wrap justify-center gap-6">
+          <div className="flex flex-wrap justify-center items-center gap-6">
             <motion.a
-              href="https://www.instagram.com/domus_pedroreoli/"
+              href="https://wa.me/24993264040"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className="font-black uppercase text-sm tracking-wider text-black hover:text-black/60 transition-colors"
+              className="text-black hover:text-black/60 transition-colors"
+              aria-label="WhatsApp"
             >
-              INSTAGRAM
+              <FaWhatsapp size={32} />
             </motion.a>
             <motion.a
-              href="https://www.linkedin.com/in/pedro-lucas-reis-a93945171/"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="mailto:pedrosousa2160@gmail.com"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className="font-black uppercase text-sm tracking-wider text-black hover:text-black/60 transition-colors"
+              className="text-black hover:text-black/60 transition-colors"
+              aria-label="Email"
             >
-              LINKEDIN
+              <FaEnvelope size={32} />
             </motion.a>
             <motion.a
               href="https://www.youtube.com/@DevDesenvolvimento"
@@ -146,9 +147,35 @@ export default function SocialSection() {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className="font-black uppercase text-sm tracking-wider text-black hover:text-black/60 transition-colors"
+              className="text-black hover:text-black/60 transition-colors relative"
+              aria-label="YouTube"
             >
-              YOUTUBE
+              <FaYoutube size={32} />
+              <span className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-xs text-black/60 whitespace-nowrap">
+                (Em Breve)
+              </span>
+            </motion.a>
+            <motion.a
+              href="https://www.instagram.com/domus_pedroreoli/"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              className="text-black hover:text-black/60 transition-colors"
+              aria-label="Instagram"
+            >
+              <FaInstagram size={32} />
+            </motion.a>
+            <motion.a
+              href="https://www.linkedin.com/in/pedro-lucas-reis-a93945171/"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              className="text-black hover:text-black/60 transition-colors"
+              aria-label="LinkedIn"
+            >
+              <FaLinkedin size={32} />
             </motion.a>
             <motion.a
               href="https://github.com/PedroReoli"
@@ -156,9 +183,10 @@ export default function SocialSection() {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className="font-black uppercase text-sm tracking-wider text-black hover:text-black/60 transition-colors"
+              className="text-black hover:text-black/60 transition-colors"
+              aria-label="GitHub"
             >
-              GITHUB
+              <FaGithub size={32} />
             </motion.a>
           </div>
         </motion.div>

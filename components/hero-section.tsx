@@ -49,7 +49,7 @@ export default function HeroSection() {
   const borderRadius = useTransform(smoothProgress, [0.3, 0.6], ["0px", "48px"])
 
   return (
-    <section ref={containerRef} className="relative h-[300vh] bg-[#0a1a2e]">
+    <section ref={containerRef} className="relative h-[300vh] bg-[#000000]">
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center bg-background">
         {/* Background Text Layer */}
         <motion.div

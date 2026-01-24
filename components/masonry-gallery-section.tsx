@@ -1,10 +1,9 @@
 "use client"
 
-import { useRef, useState } from "react"
+import { useRef, useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
-import CardBlobOverlay from "./card-blob-overlay"
 
 const galleryImages = [
   {
@@ -53,6 +52,16 @@ const galleryImages = [
 
 export default function MasonryGallerySection() {
   const sectionRef = useRef<HTMLDivElement>(null)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+    return () => window.removeEventListener("resize", checkMobile)
+  }, [])
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -62,13 +71,44 @@ export default function MasonryGallerySection() {
   // Background transition: Black -> Gray -> White
   const backgroundColor = useTransform(scrollYProgress, [0, 0.6, 0.9], ["#000000", "#ccc", "#ffffff"])
 
-  // Y Movement: Move grid up to reveal all images
-  // Starts at 0vh and moves up to -100vh to show bottom images
-  const y = useTransform(scrollYProgress, [0, 1], ["0vh", "-100vh"])
+  // Y Movement: Move grid up to reveal all images (only on desktop)
+  const y = useTransform(scrollYProgress, [0, 1], ["0vh", isMobile ? "0vh" : "-100vh"])
 
   const column1 = galleryImages.filter((_, i) => i % 2 === 0)
   const column2 = galleryImages.filter((_, i) => i % 2 === 1)
 
+  // Mobile: layout simples sem parallax
+  if (isMobile) {
+    return (
+      <section
+        ref={sectionRef}
+        id="masonry-gallery"
+        className="relative bg-black py-16 px-4"
+      >
+        {/* Título */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-8 text-center"
+        >
+          <h2 className="text-3xl font-black uppercase tracking-tight leading-[1.1]">
+            <span className="text-lorenzo-accent font-brier text-4xl">MEUS</span>{" "}
+            <span className="text-white text-4xl">PROJETOS</span>
+          </h2>
+        </motion.div>
+
+        {/* Cards em coluna única para mobile */}
+        <div className="flex flex-col gap-6 w-full">
+          {galleryImages.map((image, index) => (
+            <MasonryCard key={`mobile-${index}`} image={image} index={index} />
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  // Desktop: layout com parallax
   return (
     <section
       ref={sectionRef}
@@ -85,14 +125,14 @@ export default function MasonryGallerySection() {
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="sticky top-8 z-20 mb-12 md:mb-16 text-center"
+            className="sticky top-8 z-20 mb-8 md:mb-16 text-center px-2"
           >
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight leading-[1.1] whitespace-nowrap">
-              <span className="text-lorenzo-accent font-brier text-8xl md:text-9xl">MEUS</span>{" "}
-              <span className="text-white text-8xl md:text-9xl">PROJETOS</span>
+            <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight leading-[1.1]">
+              <span className="text-lorenzo-accent font-brier text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl">MEUS</span>{" "}
+              <span className="text-white text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl">PROJETOS</span>
             </h2>
           </motion.div>
-          
+
           <div className="flex flex-col md:flex-row gap-8 md:gap-10 w-full">
             {/* Column 1 */}
             <div className="flex flex-col gap-8 md:gap-10 w-full md:w-1/2">
@@ -115,56 +155,69 @@ export default function MasonryGallerySection() {
 }
 
 function MasonryCard({ image, index }: { image: any; index: number }) {
-  const [isHovered, setIsHovered] = useState(false)
+  const [showDescription, setShowDescription] = useState(false)
 
-  // 1920x1080 = 16:9
   return (
-    <Link href={image.link || "#"} className="block">
+    <div className="flex flex-col gap-3">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.1 }}
         viewport={{ once: true, margin: "-50px" }}
-        whileHover={{ scale: 1.03, y: -12 }}
-        onHoverStart={() => setIsHovered(true)}
-        onHoverEnd={() => setIsHovered(false)}
-        className="group relative overflow-hidden rounded-2xl bg-black shadow-xl hover:shadow-2xl transition-all duration-500 w-full cursor-pointer border border-gray-800/50 hover:border-lorenzo-accent/60"
-        style={{ aspectRatio: "21 / 9" }}
+        className="group relative overflow-hidden rounded-2xl bg-black shadow-xl w-full border border-gray-800/50"
+        style={{ aspectRatio: "16 / 9" }}
       >
         <Image
           src={image.src || "/placeholder.svg"}
           alt={image.alt}
           fill
-          className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.02]"
+          className="object-cover object-center"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
           quality={95}
         />
-        
-        {/* Overlay com animação blob */}
-        <CardBlobOverlay isHovered={isHovered} className="z-10" />
-        
-        {/* Conteúdo de texto */}
+      </motion.div>
+
+      {/* Título e botão abaixo da imagem */}
+      <div className="px-1">
+        <h3 className="text-sm sm:text-base md:text-lg font-bold text-white mb-2 line-clamp-2">
+          {image.title}
+        </h3>
+
+        {/* Descrição expansível */}
         <AnimatePresence>
-          {isHovered && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
-              transition={{ duration: 0.3 }}
-              className="absolute inset-0 z-20 flex flex-col justify-end p-8 md:p-10 pointer-events-none"
+          {showDescription && (
+            <motion.p
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.2 }}
+              className="text-xs sm:text-sm text-white/70 mb-3 leading-relaxed"
             >
-              <div className="relative z-30 text-white">
-                <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-4 md:mb-5 font-oswald uppercase tracking-wide drop-shadow-lg">
-                  {image.title}
-                </h3>
-                <p className="text-sm md:text-base lg:text-lg leading-relaxed opacity-90 drop-shadow-md max-w-2xl">
-                  {image.description}
-                </p>
-              </div>
-            </motion.div>
+              {image.description}
+            </motion.p>
           )}
         </AnimatePresence>
-      </motion.div>
-    </Link>
+
+        <div className="flex gap-2 flex-wrap">
+          <button
+            onClick={() => setShowDescription(!showDescription)}
+            className="bg-white/10 hover:bg-white/20 text-white text-xs sm:text-sm font-bold px-3 sm:px-4 py-2 rounded-lg transition-colors"
+          >
+            {showDescription ? "Menos" : "Detalhes"}
+          </button>
+          <Link
+            href={image.link || "#"}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-lorenzo-accent hover:bg-lorenzo-accent-light text-white text-xs sm:text-sm font-bold px-3 sm:px-4 py-2 rounded-lg transition-colors inline-flex items-center gap-1"
+          >
+            Saiba Mais
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M7 17L17 7M17 7H7M17 7V17" />
+            </svg>
+          </Link>
+        </div>
+      </div>
+    </div>
   )
 }

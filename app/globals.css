@@ -174,12 +174,24 @@
   }
   body {
     @apply bg-background text-foreground;
-    /* Removendo overflow-x: hidden para permitir scroll horizontal controlado na masonry */
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
   }
 
   html {
     scroll-behavior: smooth;
-    /* Removendo overflow-x: hidden para permitir scroll horizontal controlado na masonry */
+    overflow-x: hidden;
+  }
+
+  /* Melhorias de touch para mobile */
+  @media (max-width: 768px) {
+    * {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button, a {
+      touch-action: manipulation;
+    }
   }
 
   h1,

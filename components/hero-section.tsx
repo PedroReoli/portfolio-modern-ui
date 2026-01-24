@@ -8,6 +8,17 @@ import SignatureMarqueeSection from "./signature-marquee-section"
 export default function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null)
   const [isInteractive, setIsInteractive] = useState(true)
+  const [isMobile, setIsMobile] = useState(false)
+
+  // Detectar se é mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+    return () => window.removeEventListener("resize", checkMobile)
+  }, [])
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -21,9 +32,9 @@ export default function HeroSection() {
   })
 
   // Phase 1: Shrink Portrait (0% -> 40%)
-  // Maps scroll 0-0.4 to scale 1-0.45
-  const scale = useTransform(smoothProgress, [0, 0.4], [1, 0.45])
-  
+  // Maps scroll 0-0.4 to scale 1-0.45 (desktop) or 1-0.6 (mobile)
+  const scale = useTransform(smoothProgress, [0, 0.4], [1, isMobile ? 0.6 : 0.45])
+
   // Desabilita interatividade após 30% do scroll
   useEffect(() => {
     const unsubscribe = smoothProgress.on("change", (latest) => {
@@ -44,12 +55,12 @@ export default function HeroSection() {
   // Everything slides up to reveal next section
   const exitY = useTransform(smoothProgress, [0.85, 1], ["0%", "-100%"])
   const exitOpacity = useTransform(smoothProgress, [0.9, 1], [1, 0])
-  
+
   // Border radius aumenta após scroll (em pixels) - mais arredondada
-  const borderRadius = useTransform(smoothProgress, [0.3, 0.6], ["0px", "48px"])
+  const borderRadius = useTransform(smoothProgress, [0.3, 0.6], ["0px", isMobile ? "24px" : "48px"])
 
   return (
-    <section ref={containerRef} className="relative h-[300vh] bg-[#000000]">
+    <section ref={containerRef} className="relative h-[200vh] md:h-[300vh] bg-[#000000]">
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center bg-background">
         {/* Background Text Layer */}
         <motion.div

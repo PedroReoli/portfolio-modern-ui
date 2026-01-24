@@ -60,10 +60,10 @@ export default function MissionSection() {
     <section
       id="mission"
       ref={sectionRef}
-      className="relative min-h-screen bg-lorenzo-dark text-lorenzo-text-light py-24 flex items-center justify-center"
+      className="relative min-h-[70vh] md:min-h-screen bg-lorenzo-dark text-lorenzo-text-light py-12 md:py-24 flex items-center justify-center"
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
-        
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
+
         {/*
         <div className="flex justify-center mb-12">
           <div className="flex items-center gap-3 border-2 border-white/20 rounded-full px-6 py-3">
@@ -76,30 +76,30 @@ export default function MissionSection() {
         </div>
         */}
 
-          <div className="relative h-32 flex items-center justify-center mt-16">
+          <div className="relative h-20 md:h-32 flex items-center justify-center mt-8 md:mt-16">
             <img
               src="/images/icon/ico-helmet-w.png"
-              className="h-full w-auto max-h-[60px] object-contain"
+              className="h-full w-auto max-h-[40px] md:max-h-[60px] object-contain"
             />
           </div>
-        
-        <div className="text-center">
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight text-balance leading-[1.1] xl:text-8xl">
-            <span className="text-lorenzo-accent font-brier leading-[1.1] text-8xl">REDEFININDO</span> LIMITES,
+
+        <div className="text-center px-1 sm:px-2">
+          <h2 className="text-xl sm:text-2xl md:text-5xl lg:text-6xl xl:text-7xl font-black uppercase tracking-tight text-balance leading-[1.2] md:leading-[1.15]">
+            <span className="text-lorenzo-accent font-brier leading-[1.2] md:leading-[1.15] text-2xl sm:text-3xl md:text-6xl lg:text-7xl xl:text-8xl">REDEFININDO</span> LIMITES,
             <br />
-            CRIANDO <span className="text-lorenzo-accent font-brier leading-[1.1]">SOLUÇÕES</span>,
+            CRIANDO <span className="text-lorenzo-accent font-brier leading-[1.2] md:leading-[1.15] text-2xl sm:text-3xl md:text-6xl lg:text-7xl xl:text-8xl">SOLUÇÕES</span>,
             <br />
-            TRANSFORMANDO IDEIAS
+            <span className="text-lg sm:text-xl md:text-5xl lg:text-6xl xl:text-7xl">TRANSFORMANDO IDEIAS</span>
             <br />
-            EM <span className="text-lorenzo-accent font-brier leading-[1.1]">EXPERIÊNCIAS REAIS</span>.
-           
+            EM <span className="text-lorenzo-accent font-brier leading-[1.2] md:leading-[1.15] text-2xl sm:text-3xl md:text-6xl lg:text-7xl xl:text-8xl">EXPERIÊNCIAS REAIS</span>.
+
           </h2>
         </div>
 
         {/* Signature animation */}
         {/*
         <div className="relative h-32 flex items-center justify-center mt-16">
-          
+
           <svg width="400" height="150" viewBox="0 0 400 150" className="w-full max-w-md">
             <motion.path
               d="M30,75 Q60,40 110,75 T220,75 Q250,95 310,65 Q340,45 370,75 M200,90 Q220,110 250,90"

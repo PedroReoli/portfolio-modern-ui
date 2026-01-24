@@ -75,7 +75,31 @@ export default function InteractivePortrait({ isInteractive = true }: Interactiv
           this.uniforms.pointerDown.value = 1
         }
 
+        const handleTouchMove = (event: TouchEvent) => {
+          if (!isInteractive) {
+            this.uniforms.pointer.value.setScalar(10)
+            this.uniforms.pointerDown.value = 0
+            return
+          }
+          const touch = event.touches[0]
+          if (touch) {
+            const rect = container.getBoundingClientRect()
+            this.uniforms.pointer.value.x = ((touch.clientX - rect.left) / width) * 2 - 1
+            this.uniforms.pointer.value.y = -((touch.clientY - rect.top) / height) * 2 + 1
+            this.uniforms.pointerDown.value = 1
+          }
+        }
+
         const handleMouseLeave = () => {
+          this.uniforms.pointer.value.setScalar(10)
+          if (isInteractive) {
+            this.uniforms.pointerDown.value = 1
+          } else {
+            this.uniforms.pointerDown.value = 0
+          }
+        }
+
+        const handleTouchEnd = () => {
           this.uniforms.pointer.value.setScalar(10)
           if (isInteractive) {
             this.uniforms.pointerDown.value = 1
@@ -86,6 +110,8 @@ export default function InteractivePortrait({ isInteractive = true }: Interactiv
 
         container.addEventListener("mousemove", handleMouseMove)
         container.addEventListener("mouseleave", handleMouseLeave)
+        container.addEventListener("touchmove", handleTouchMove, { passive: true })
+        container.addEventListener("touchend", handleTouchEnd)
         
         // Atualizar pointerDown quando isInteractive mudar
         if (!isInteractive) {
@@ -481,13 +507,13 @@ export default function InteractivePortrait({ isInteractive = true }: Interactiv
     <div
       ref={containerRef}
       className={`fixed inset-0 w-full h-full bg-[#000000] overflow-hidden ${isInteractive ? "cursor-crosshair" : "cursor-default"}`}
-      style={{ touchAction: "none" }}
+      style={{ touchAction: "pan-y" }}
     >
       <img
         src="/images/inspired-by-lando-norris.png"
         alt="Inspired by Lorenzo"
-        className="absolute bottom-4 left-4 z-10 pointer-events-none"
-        style={{ maxWidth: "120px", width: "120px", height: "auto" }}
+        className="absolute bottom-2 left-2 sm:bottom-4 sm:left-4 z-10 pointer-events-none w-16 sm:w-20 md:w-24 lg:w-[120px]"
+        style={{ height: "auto" }}
       />
     </div>
   )

@@ -35,11 +35,11 @@ export default function SocialSection() {
   }, [])
 
   return (
-    <section id="social-section" className="relative bg-[#F5F1E8] text-black py-24 px-6 md:px-12 overflow-hidden">
+    <section id="social-section" className="relative bg-[#F5F1E8] text-black py-12 md:py-24 px-4 sm:px-6 md:px-12 overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <div className="relative h-32 flex items-center justify-center mt-16">
+        <div className="relative h-20 md:h-32 flex items-center justify-center mt-8 md:mt-16">
           {/* Replaced static image with animated icon switcher */}
-          <div className="relative h-full w-auto max-h-[60px] aspect-square">
+          <div className="relative h-full w-auto max-h-[40px] md:max-h-[60px] aspect-square">
             {handIcons.map((icon, index) => (
               <div
                 key={icon}
@@ -62,9 +62,9 @@ export default function SocialSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-8 md:mb-12"
         >
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase leading-none text-lorenzo-dark mb-8">
+          <h2 className="text-xl sm:text-2xl md:text-5xl lg:text-6xl xl:text-7xl font-black uppercase leading-tight text-lorenzo-dark mb-4 md:mb-8 px-2">
             Me siga nas redes sociais
           </h2>
         </motion.div>
@@ -120,26 +120,26 @@ export default function SocialSection() {
           viewport={{ once: true }}
           className="text-center space-y-6"
         >
-          <div className="flex flex-wrap justify-center items-center gap-6">
+          <div className="flex flex-wrap justify-center items-center gap-5 md:gap-6">
             <motion.a
               href="https://wa.me/24993264040"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className="text-black hover:text-black/60 transition-colors"
+              className="text-black hover:text-black/60 transition-colors p-2"
               aria-label="WhatsApp"
             >
-              <FaWhatsapp size={32} />
+              <FaWhatsapp className="w-7 h-7 md:w-8 md:h-8" />
             </motion.a>
             <motion.a
               href="mailto:pedrosousa2160@gmail.com"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className="text-black hover:text-black/60 transition-colors"
+              className="text-black hover:text-black/60 transition-colors p-2"
               aria-label="Email"
             >
-              <FaEnvelope size={32} />
+              <FaEnvelope className="w-7 h-7 md:w-8 md:h-8" />
             </motion.a>
             <motion.a
               href="https://www.youtube.com/@DevDesenvolvimento"
@@ -147,11 +147,11 @@ export default function SocialSection() {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className="text-black hover:text-black/60 transition-colors relative"
+              className="text-black hover:text-black/60 transition-colors relative p-2"
               aria-label="YouTube"
             >
-              <FaYoutube size={32} />
-              <span className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-xs text-black/60 whitespace-nowrap">
+              <FaYoutube className="w-7 h-7 md:w-8 md:h-8" />
+              <span className="absolute -bottom-4 left-1/2 -translate-x-1/2 text-[10px] md:text-xs text-black/60 whitespace-nowrap">
                 (Em Breve)
               </span>
             </motion.a>
@@ -161,10 +161,10 @@ export default function SocialSection() {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className="text-black hover:text-black/60 transition-colors"
+              className="text-black hover:text-black/60 transition-colors p-2"
               aria-label="Instagram"
             >
-              <FaInstagram size={32} />
+              <FaInstagram className="w-7 h-7 md:w-8 md:h-8" />
             </motion.a>
             <motion.a
               href="https://www.linkedin.com/in/pedro-lucas-reis-a93945171/"
@@ -172,10 +172,10 @@ export default function SocialSection() {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className="text-black hover:text-black/60 transition-colors"
+              className="text-black hover:text-black/60 transition-colors p-2"
               aria-label="LinkedIn"
             >
-              <FaLinkedin size={32} />
+              <FaLinkedin className="w-7 h-7 md:w-8 md:h-8" />
             </motion.a>
             <motion.a
               href="https://github.com/PedroReoli"
@@ -183,10 +183,10 @@ export default function SocialSection() {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className="text-black hover:text-black/60 transition-colors"
+              className="text-black hover:text-black/60 transition-colors p-2"
               aria-label="GitHub"
             >
-              <FaGithub size={32} />
+              <FaGithub className="w-7 h-7 md:w-8 md:h-8" />
             </motion.a>
           </div>
         </motion.div>

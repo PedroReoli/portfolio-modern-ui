@@ -160,10 +160,10 @@ export default function HelmetHall() {
           viewport={{ once: true }}
           className="mb-12 md:mb-20"
         >
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight text-center">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-black uppercase tracking-tight text-center">
             <span className="text-white">Tecnologias e</span>
             <br />
-            <span className="text-lorenzo-accent font-brier text-8xl">Competências</span>
+            <span className="text-lorenzo-accent font-brier text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl">Competências</span>
           </h2>
           <p className="text-base md:text-lg text-white/60 mt-6 max-w-3xl mx-auto text-center">
             Utilizo ferramentas modernas e boas práticas para desenvolver aplicações organizadas, funcionais e de fácil
@@ -172,30 +172,30 @@ export default function HelmetHall() {
         </motion.div>
 
         {/* Botões de alternância */}
-        <div className="flex justify-center gap-4 mb-8">
+        <div className="flex justify-center gap-2 sm:gap-4 mb-8 px-2">
           <motion.button
             onClick={() => setView("stack")}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className={`px-8 py-3 rounded-lg font-bold text-lg transition-all duration-300 ${
+            className={`px-4 sm:px-6 md:px-8 py-2 sm:py-3 rounded-lg font-bold text-xs sm:text-sm md:text-base lg:text-lg transition-all duration-300 ${
               view === "stack"
                 ? "bg-lorenzo-accent text-black shadow-lg shadow-lorenzo-accent/50"
                 : "bg-white/10 text-white/70 hover:bg-white/20"
             }`}
           >
-            Stack Tecnológica
+            Stack
           </motion.button>
           <motion.button
             onClick={() => setView("competencies")}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className={`px-8 py-3 rounded-lg font-bold text-lg transition-all duration-300 ${
+            className={`px-4 sm:px-6 md:px-8 py-2 sm:py-3 rounded-lg font-bold text-xs sm:text-sm md:text-base lg:text-lg transition-all duration-300 ${
               view === "competencies"
                 ? "bg-lorenzo-accent text-black shadow-lg shadow-lorenzo-accent/50"
                 : "bg-white/10 text-white/70 hover:bg-white/20"
             }`}
           >
-            Competências Técnicas
+            Competências
           </motion.button>
         </div>
 

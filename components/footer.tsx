@@ -48,13 +48,31 @@ export default function Footer() {
           <div className="flex-1 flex items-center justify-center mt-0">
             {/* Center Column - Helmet & Title */}
             <div className="flex flex-col items-center justify-center relative w-full">
-              {/* Typography Overlay - Increased top margin for more spacing */}
-              <div className="absolute top-0 left-0 right-0 z-0 text-center mt-4 sm:mt-8 md:mt-20 lg:mt-24 px-2 sm:px-4">
+              {/* Typography - Card no mobile, overlay no desktop */}
+              {/* Mobile Card */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                className="md:hidden relative z-20 bg-white/10 backdrop-blur-md rounded-2xl px-4 py-5 mx-2 mb-4 border border-white/20 shadow-xl"
+              >
+                <h2 className="text-lg sm:text-xl font-black uppercase tracking-tight leading-[1.2] text-center text-white">
+                  <span className="font-sans block">SEMPRE
+                  <span className="font-brier text-lorenzo-accent"> TRANSFORMANDO</span>
+                  </span>
+                  <span className="font-sans block">
+                    IDEIAS EM <span className="font-brier text-lorenzo-accent">REALIDADE.</span>
+                  </span>
+                </h2>
+              </motion.div>
+
+              {/* Desktop Overlay */}
+              <div className="hidden md:block absolute top-0 left-0 right-0 z-0 text-center mt-20 lg:mt-24 px-4">
                 <motion.h2
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8 }}
-                  className="text-base sm:text-lg md:text-4xl lg:text-6xl xl:text-7xl font-black uppercase tracking-tighter leading-[1.15] text-lorenzo-text-light mix-blend-overlay opacity-90"
+                  className="text-4xl lg:text-6xl xl:text-7xl font-black uppercase tracking-tighter leading-[1.15] text-lorenzo-text-light mix-blend-overlay opacity-90"
                 >
                   <span className="font-sans block">SEMPRE
                   <span className="font-brier text-lorenzo-accent"> TRANSFORMANDO</span>
@@ -66,7 +84,7 @@ export default function Footer() {
               </div>
 
               {/* 3D Helmet */}
-              <div className="relative w-full h-[160px] sm:h-[200px] md:h-[350px] lg:h-[450px] z-10 mt-16 sm:mt-20 md:mt-28">
+              <div className="relative w-full h-[140px] sm:h-[180px] md:h-[350px] lg:h-[450px] z-10 md:mt-28">
                 <HelmetCanvas />
               </div>
 

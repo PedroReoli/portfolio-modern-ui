@@ -191,6 +191,8 @@ export default function InteractivePortrait({ isInteractive = true }: Interactiv
     let animationCompleted = false
 
     const textureLoader = new THREE.TextureLoader()
+    const isMobileDevice = width < 768
+
     // Usando hero-on como imagem principal
     const baseTexture = textureLoader.load("/images/hero-on.png", (texture) => {
       const img = texture.image
@@ -208,6 +210,14 @@ export default function InteractivePortrait({ isInteractive = true }: Interactiv
       baseImage.geometry = new THREE.PlaneGeometry(planeWidth, planeHeight)
       helmetImage.geometry.dispose()
       helmetImage.geometry = new THREE.PlaneGeometry(planeWidth, planeHeight)
+
+      // Posicionar na base em mobile
+      if (isMobileDevice) {
+        const verticalOffset = (height - planeHeight) / 2 - (height * 0.05)
+        baseImage.position.y = -verticalOffset
+        helmetImage.position.y = -verticalOffset
+        bgPlane.position.y = -verticalOffset
+      }
     })
 
     // hero-off como imagem secundária (que aparece com a interação)
@@ -506,13 +516,13 @@ export default function InteractivePortrait({ isInteractive = true }: Interactiv
   return (
     <div
       ref={containerRef}
-      className={`fixed inset-0 w-full h-full bg-[#000000] overflow-hidden ${isInteractive ? "cursor-crosshair" : "cursor-default"}`}
+      className={`absolute inset-0 w-full h-full bg-[#000000] overflow-hidden ${isInteractive ? "cursor-crosshair" : "cursor-default"}`}
       style={{ touchAction: "pan-y" }}
     >
       <img
         src="/images/inspired-by-lando-norris.png"
         alt="Inspired by Lorenzo"
-        className="absolute bottom-2 left-2 sm:bottom-4 sm:left-4 z-10 pointer-events-none w-16 sm:w-20 md:w-24 lg:w-[120px]"
+        className="absolute bottom-2 left-2 sm:bottom-4 sm:left-4 z-10 pointer-events-none w-14 sm:w-16 md:w-24 lg:w-[120px]"
         style={{ height: "auto" }}
       />
     </div>

@@ -179,43 +179,45 @@ function MasonryCard({ image, index }: { image: any; index: number }) {
 
       {/* Título e botão abaixo da imagem */}
       <div className="px-1">
-        <h3 className="text-sm sm:text-base md:text-lg font-bold text-white mb-2 line-clamp-2">
-          {image.title}
-        </h3>
+        <div className="rounded-xl border border-white/10 bg-black/70 px-4 py-3 shadow-lg backdrop-blur">
+          <h3 className="text-sm sm:text-base md:text-lg font-bold text-white mb-2 line-clamp-2 drop-shadow-sm">
+            {image.title}
+          </h3>
 
-        {/* Descrição expansível */}
-        <AnimatePresence>
-          {showDescription && (
-            <motion.p
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.2 }}
-              className="text-xs sm:text-sm text-white/70 mb-3 leading-relaxed"
+          {/* Descrição expansível */}
+          <AnimatePresence>
+            {showDescription && (
+              <motion.p
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.2 }}
+                className="text-xs sm:text-sm text-white/80 mb-3 leading-relaxed"
+              >
+                {image.description}
+              </motion.p>
+            )}
+          </AnimatePresence>
+
+          <div className="flex gap-2 flex-wrap">
+            <button
+              onClick={() => setShowDescription(!showDescription)}
+              className="bg-white/10 hover:bg-white/20 text-white text-xs sm:text-sm font-bold px-3 sm:px-4 py-2 rounded-lg transition-colors"
             >
-              {image.description}
-            </motion.p>
-          )}
-        </AnimatePresence>
-
-        <div className="flex gap-2 flex-wrap">
-          <button
-            onClick={() => setShowDescription(!showDescription)}
-            className="bg-white/10 hover:bg-white/20 text-white text-xs sm:text-sm font-bold px-3 sm:px-4 py-2 rounded-lg transition-colors"
-          >
-            {showDescription ? "Menos" : "Detalhes"}
-          </button>
-          <Link
-            href={image.link || "#"}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-lorenzo-accent hover:bg-lorenzo-accent-light text-white text-xs sm:text-sm font-bold px-3 sm:px-4 py-2 rounded-lg transition-colors inline-flex items-center gap-1"
-          >
-            Saiba Mais
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M7 17L17 7M17 7H7M17 7V17" />
-            </svg>
-          </Link>
+              {showDescription ? "Menos" : "Detalhes"}
+            </button>
+            <Link
+              href={image.link || "#"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-lorenzo-accent hover:bg-lorenzo-accent-light text-white text-xs sm:text-sm font-bold px-3 sm:px-4 py-2 rounded-lg transition-colors inline-flex items-center gap-1"
+            >
+              Saiba Mais
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M7 17L17 7M17 7H7M17 7V17" />
+              </svg>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

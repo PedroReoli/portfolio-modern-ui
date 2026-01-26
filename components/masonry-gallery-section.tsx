@@ -118,8 +118,8 @@ export default function MasonryGallerySection() {
         height: "250vh",
       }}
     >
-      <motion.div className="sticky top-0 h-screen w-full overflow-hidden" style={{ backgroundColor }}>
-        <motion.div style={{ y }} className="relative w-full max-w-[1400px] mx-auto px-4 md:px-8 py-20">
+      <motion.div className="sticky top-0 h-screen w-full overflow-visible" style={{ backgroundColor }}>
+        <motion.div style={{ y }} className="relative w-full max-w-[1400px] mx-auto px-4 md:px-8 py-20 pb-32">
           {/* Título fixo */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}

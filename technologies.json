@@ -2,34 +2,68 @@
   "technologies": [
     { "name": "HTML", "category": "Front-end", "iconType": "SiHtml5" },
     { "name": "CSS", "category": "Front-end", "iconType": "SiCss3" },
-    { "name": "Tailwind", "category": "Front-end", "iconType": "SiTailwindcss" },
+    { "name": "JavaScript", "category": "Front-end", "iconType": "SiJavascript" },
+    { "name": "TypeScript", "category": "Front-end", "iconType": "SiTypescript" },
+    { "name": "TailwindCSS", "category": "Front-end", "iconType": "SiTailwindcss" },
+    { "name": "Sass (SCSS)", "category": "Front-end", "iconType": "SiSass" },
+    { "name": "CSS Modules", "category": "Front-end", "iconType": "FaThLarge" },
+    { "name": "Styled Components", "category": "Front-end", "iconType": "SiStyledcomponents" },
     { "name": "Framer Motion", "category": "Front-end", "iconType": "TbBrandFramerMotion" },
     { "name": "Three.js", "category": "Front-end", "iconType": "TbBrandThreejs" },
     { "name": "React", "category": "Front-end", "iconType": "SiReact" },
     { "name": "Next.js", "category": "Front-end", "iconType": "SiNextdotjs" },
+    { "name": "Vue.js", "category": "Front-end", "iconType": "SiVuedotjs" },
+    { "name": "Angular", "category": "Front-end", "iconType": "SiAngular" },
+    { "name": "Acessibilidade (a11y)", "category": "Front-end", "iconType": "FaUniversalAccess" },
+    { "name": "Responsive Design", "category": "Front-end", "iconType": "FaMobileAlt" },
+    { "name": "Mobile First", "category": "Front-end", "iconType": "FaMobileAlt" },
 
     { "name": "Node.js", "category": "Back-end", "iconType": "SiNodedotjs" },
     { "name": "Express", "category": "Back-end", "iconType": "SiExpress" },
     { "name": "NestJS", "category": "Back-end", "iconType": "SiNestjs" },
     { "name": "SQL", "category": "Back-end", "iconType": "FaDatabase" },
 
+    { "name": "React Query (TanStack Query)", "category": "State and Data", "iconType": "FaSyncAlt" },
+    { "name": "Redux", "category": "State and Data", "iconType": "SiRedux" },
+    { "name": "Zustand", "category": "State and Data", "iconType": "FaCube" },
+    { "name": "Context API", "category": "State and Data", "iconType": "FaProjectDiagram" },
+
     { "name": "REST APIs", "category": "APIs and Integrations", "iconType": "FaServer" },
-    { "name": "Swagger", "category": "APIs and Integrations", "iconType": "SiSwagger" },
+    { "name": "Swagger (OpenAPI)", "category": "APIs and Integrations", "iconType": "SiSwagger" },
     { "name": "Postman", "category": "APIs and Integrations", "iconType": "SiPostman" },
+    { "name": "Autenticação (JWT)", "category": "APIs and Integrations", "iconType": "SiJsonwebtokens" },
 
     { "name": "Git", "category": "Versioning and Collaboration", "iconType": "SiGit" },
     { "name": "GitHub", "category": "Versioning and Collaboration", "iconType": "SiGithub" },
+    {
+      "name": "Git Flow / Pull Requests / Code Review",
+      "category": "Versioning and Collaboration",
+      "iconType": "FaCodeBranch"
+    },
 
-    { "name": "Notion", "category": "Others", "iconType": "SiNotion" },
-    { "name": "Mobile First", "category": "Others", "iconType": "FaMobileAlt" }
+    { "name": "ESLint", "category": "Quality and Performance", "iconType": "SiEslint" },
+    { "name": "Prettier", "category": "Quality and Performance", "iconType": "SiPrettier" },
+    { "name": "Clean Code", "category": "Quality and Performance", "iconType": "FaCheckCircle" },
+    {
+      "name": "Performance Optimization (lazy loading, code splitting)",
+      "category": "Quality and Performance",
+      "iconType": "FaTachometerAlt"
+    },
+
+    { "name": "Figma", "category": "Tools and Others", "iconType": "SiFigma" },
+    { "name": "Notion", "category": "Tools and Others", "iconType": "SiNotion" },
+    { "name": "Vite / Webpack", "category": "Tools and Others", "iconType": "SiVite" },
+    { "name": "NPM / Yarn", "category": "Tools and Others", "iconType": "SiNpm" }
   ],
   "categories": {
     "stack": [
       "Front-end",
       "Back-end",
+      "State and Data",
       "APIs and Integrations",
       "Versioning and Collaboration",
-      "Others"
+      "Quality and Performance",
+      "Tools and Others"
     ]
   }
 }

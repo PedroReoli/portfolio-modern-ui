@@ -20,9 +20,12 @@ type LocalizedText = {
 type CategoryKey =
   | "Front-end"
   | "Back-end"
+  | "State and Data"
   | "APIs and Integrations"
   | "Versioning and Collaboration"
   | "Others"
+  | "Quality and Performance"
+  | "Tools and Others"
   | "Code and Quality"
   | "Tools and Process"
 
@@ -36,11 +39,14 @@ const categoryLabels: Record<CategoryKey, LocalizedText> = {
   "Front-end": { pt: "Front-end", en: "Front-end" },
   "Back-end": { pt: "Back-end", en: "Back-end" },
   "APIs and Integrations": { pt: "APIs e Integrações", en: "APIs and Integrations" },
+  "State and Data": { pt: "State & Data", en: "State & Data" },
   "Versioning and Collaboration": {
     pt: "Versionamento e Colaboração",
     en: "Versioning and Collaboration",
   },
   Others: { pt: "Outros", en: "Others" },
+  "Quality and Performance": { pt: "Qualidade e Performance", en: "Quality and Performance" },
+  "Tools and Others": { pt: "Ferramentas e Outros", en: "Tools and Others" },
   "Code and Quality": { pt: "Código e Qualidade", en: "Code and Quality" },
   "Tools and Process": { pt: "Ferramentas e Processo", en: "Tools and Process" },
 }
@@ -166,9 +172,11 @@ const competencies: CompetencyItem[] = [
 const stackCategoryKeys: CategoryKey[] = [
   "Front-end",
   "Back-end",
+  "State and Data",
   "APIs and Integrations",
   "Versioning and Collaboration",
-  "Others",
+  "Quality and Performance",
+  "Tools and Others",
 ]
 
 const competencyCategoryKeys: CategoryKey[] = [
@@ -403,4 +411,3 @@ export default function HelmetHall() {
     </section>
   )
 }
-

@@ -57,7 +57,7 @@ export default function PartnersSection() {
             </div>
 
             <p className="text-base md:text-lg text-black/70 leading-relaxed max-w-xl">
-              PedroReis1/1 colabora com uma ampla gama de parceiros, que compartilham a paixão por tecnologia e inovação.
+              PedroReis1/1 collaborates with a wide range of partners who share a passion for technology and innovation.
             </p>
 
             <div className="grid grid-cols-4 gap-6 pt-8">

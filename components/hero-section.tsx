@@ -4,12 +4,16 @@ import { useRef, useState, useEffect, useCallback } from "react"
 import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion"
 import InteractivePortrait from "./interactive-portrait"
 import SignatureMarqueeSection from "./signature-marquee-section"
+import { useLanguage } from "@/components/language-provider"
 
 export default function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null)
   const [isInteractive, setIsInteractive] = useState(true)
   const [isMobile, setIsMobile] = useState(false)
   const [showOnImage, setShowOnImage] = useState(true)
+  const { language } = useLanguage()
+
+  const startTourLabel = language === "en" ? "Start Tour" : "Iniciar Tour"
 
   // Detectar se é mobile
   useEffect(() => {
@@ -183,7 +187,7 @@ export default function HeroSection() {
             whileTap={{ scale: 0.95 }}
             className="bg-lorenzo-accent text-white font-bold uppercase px-8 py-4 rounded-full text-base tracking-wider shadow-xl shadow-lorenzo-accent/40 flex items-center gap-3"
           >
-            Iniciar Tour
+            {startTourLabel}
             <motion.svg
               width="20"
               height="20"

@@ -1,58 +1,146 @@
-"use client"
+﻿"use client"
 
 import { useRef, useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
+import { useLanguage } from "@/components/language-provider"
 
-const galleryImages = [
+type Language = "pt" | "en"
+
+type LocalizedText = {
+  pt: string
+  en: string
+}
+
+type GalleryImage = {
+  src: string
+  alt: string
+  link: string
+  title: LocalizedText
+  description: LocalizedText
+}
+
+const galleryImages: GalleryImage[] = [
   {
     src: "/images/a1.png",
     alt: "Autocom3",
     link: "https://autocom3.com.br",
-    title: "Autocom3 – Sistemas de Gestão ERP",
-    description: "Site institucional criado para empresa especializada em sistemas ERP para o varejo. A estrutura foi planejada para apresentar soluções, módulos e diferenciais da plataforma de forma clara e objetiva.",
+    title: {
+      pt: "Autocom3 – Sistemas de Gestão ERP",
+      en: "Autocom3 – ERP Management Systems",
+    },
+    description: {
+      pt: "Site institucional criado para empresa especializada em sistemas ERP para o varejo. A estrutura foi planejada para apresentar soluções, módulos e diferenciais da plataforma de forma clara e objetiva.",
+      en: "A corporate website built for a company specializing in ERP systems for retail. The structure was designed to present solutions, modules, and platform differentiators in a clear and objective way.",
+    },
   },
   {
     src: "/images/a2.png",
     alt: "Le Fauteuil",
     link: "https://lefauteuil-vercel.com.br",
-    title: "Le Fauteuil – Loja de Poltronas ",
-    description: "Projeto visual inspirado em lojas parisienses, voltado para a venda de poltronas de alto padrão. O layout valoriza elegância, sofisticação e experiência do usuário, com foco em apresentação de produtos e identidade visual refinada.",
+    title: {
+      pt: "Le Fauteuil – Loja de Poltronas",
+      en: "Le Fauteuil – Premium Armchair Store",
+    },
+    description: {
+      pt: "Projeto visual inspirado em lojas parisienses, voltado para a venda de poltronas de alto padrão. O layout valoriza elegância, sofisticação e experiência do usuário, com foco em apresentação de produtos e identidade visual refinada.",
+      en: "A visual concept inspired by Parisian boutiques, focused on selling premium armchairs. The layout emphasizes elegance, sophistication, and user experience, with attention to product presentation and refined branding.",
+    },
   },
   {
     src: "/images/a5.png",
     alt: "PetCare",
     link: "https://ecommercepetshoppedroreoli.vercel.app/",
-    title: "PetCare – E-commerce para PetShop",
-    description: "E-commerce desenvolvido para loja de produtos pet, com foco em usabilidade, organização de categorias e experiência de compra. O projeto valoriza navegação intuitiva, apresentação de produtos e processo de checkout simplificado.",
+    title: {
+      pt: "PetCare – E-commerce para PetShop",
+      en: "PetCare – Pet Shop E-commerce",
+    },
+    description: {
+      pt: "E-commerce desenvolvido para loja de produtos pet, com foco em usabilidade, organização de categorias e experiência de compra. O projeto valoriza navegação intuitiva, apresentação de produtos e processo de checkout simplificado.",
+      en: "An e-commerce experience built for a pet products store, focused on usability, category organization, and the buying journey. The project highlights intuitive navigation, strong product presentation, and a simplified checkout flow.",
+    },
   },
   {
     src: "/images/a6.png",
     alt: "Sivis Tecnologia",
     link: "https://sivis.com.br",
-    title: "Sivis Tecnologia – Sistemas para Clubes",
-    description: "Site institucional criado para empresa especializada em sistemas de gestão para clubes. A estrutura foi pensada para apresentar soluções, diferenciais e módulos do sistema de forma clara e objetiva.",
+    title: {
+      pt: "Sivis Tecnologia – Sistemas para Clubes",
+      en: "Sivis Tecnologia – Management Systems for Clubs",
+    },
+    description: {
+      pt: "Site institucional criado para empresa especializada em sistemas de gestão para clubes. A estrutura foi pensada para apresentar soluções, diferenciais e módulos do sistema de forma clara e objetiva.",
+      en: "A corporate website created for a company specializing in club management systems. The structure was planned to present solutions, differentiators, and system modules clearly and objectively.",
+    },
   },
   {
     src: "/images/a7.png",
     alt: "Nexus Brazil",
     link: "https://nexusbrazil.com.br",
-    title: "Nexus Brazil – Proteção Veicular",
-    description: "Site institucional desenvolvido para empresa de proteção veicular. O projeto destaca planos, benefícios, cobertura e formas de adesão, com foco em confiança, acessibilidade e navegação intuitiva.",
+    title: {
+      pt: "Nexus Brazil – Proteção Veicular",
+      en: "Nexus Brazil – Vehicle Protection",
+    },
+    description: {
+      pt: "Site institucional desenvolvido para empresa de proteção veicular. O projeto destaca planos, benefícios, cobertura e formas de adesão, com foco em confiança, acessibilidade e navegação intuitiva.",
+      en: "A corporate website developed for a vehicle protection company. The project highlights plans, benefits, coverage, and enrollment options, with a focus on trust, accessibility, and intuitive navigation.",
+    },
   },
   {
     src: "/images/a4.png",
     alt: "InvestPro – Evento de Mercado Financeiro",
     link: "https://investpro-vercel.com.br",
-    title: "InvestPro – Evento de Mercado Financeiro",
-    description: "Landing page desenvolvida para divulgação de evento do mercado financeiro. O projeto prioriza conversão, clareza das informações e organização do cronograma, palestrantes e temas abordados.",
+    title: {
+      pt: "InvestPro – Evento de Mercado Financeiro",
+      en: "InvestPro – Financial Market Event",
+    },
+    description: {
+      pt: "Landing page desenvolvida para divulgação de evento do mercado financeiro. O projeto prioriza conversão, clareza das informações e organização do cronograma, palestrantes e temas abordados.",
+      en: "A landing page built to promote a financial market event. The project prioritizes conversion, clarity of information, and the organization of the schedule, speakers, and topics covered.",
+    },
   },
 ]
+
+type Labels = {
+  my: string
+  projects: string
+  details: string
+  less: string
+  learnMore: string
+}
+
+function localizeImages(images: GalleryImage[], language: Language) {
+  return images.map((image) => ({
+    ...image,
+    title: image.title[language],
+    description: image.description[language],
+  }))
+}
 
 export default function MasonryGallerySection() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const [isMobile, setIsMobile] = useState(false)
+  const { language } = useLanguage()
+
+  const labels: Labels =
+    language === "en"
+      ? {
+          my: "MY",
+          projects: "PROJECTS",
+          details: "Details",
+          less: "Less",
+          learnMore: "Learn More",
+        }
+      : {
+          my: "MEUS",
+          projects: "PROJETOS",
+          details: "Detalhes",
+          less: "Menos",
+          learnMore: "Saiba Mais",
+        }
+
+  const localizedImages = localizeImages(galleryImages, language)
 
   useEffect(() => {
     const checkMobile = () => {
@@ -68,24 +156,15 @@ export default function MasonryGallerySection() {
     offset: ["start start", "end end"],
   })
 
-  // Background transition: Black -> Gray -> White
   const backgroundColor = useTransform(scrollYProgress, [0, 0.6, 0.9], ["#000000", "#ccc", "#ffffff"])
-
-  // Y Movement: Move grid up to reveal all images (only on desktop)
   const y = useTransform(scrollYProgress, [0, 1], ["0vh", isMobile ? "0vh" : "-100vh"])
 
-  const column1 = galleryImages.filter((_, i) => i % 2 === 0)
-  const column2 = galleryImages.filter((_, i) => i % 2 === 1)
+  const column1 = localizedImages.filter((_, i) => i % 2 === 0)
+  const column2 = localizedImages.filter((_, i) => i % 2 === 1)
 
-  // Mobile: layout simples sem parallax
   if (isMobile) {
     return (
-      <section
-        ref={sectionRef}
-        id="masonry-gallery"
-        className="relative bg-black py-16 px-4"
-      >
-        {/* Título */}
+      <section ref={sectionRef} id="masonry-gallery" className="relative bg-black py-16 px-4">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -93,22 +172,20 @@ export default function MasonryGallerySection() {
           className="mb-8 text-center"
         >
           <h2 className="text-3xl font-black uppercase tracking-tight leading-[1.1]">
-            <span className="text-lorenzo-accent font-brier text-4xl">MEUS</span>{" "}
-            <span className="text-white text-4xl">PROJETOS</span>
+            <span className="text-lorenzo-accent font-brier text-4xl">{labels.my}</span>{" "}
+            <span className="text-white text-4xl">{labels.projects}</span>
           </h2>
         </motion.div>
 
-        {/* Cards em coluna única para mobile */}
         <div className="flex flex-col gap-6 w-full">
-          {galleryImages.map((image, index) => (
-            <MasonryCard key={`mobile-${index}`} image={image} index={index} />
+          {localizedImages.map((image, index) => (
+            <MasonryCard key={`mobile-${index}`} image={image} labels={labels} />
           ))}
         </div>
       </section>
     )
   }
 
-  // Desktop: layout com parallax
   return (
     <section
       ref={sectionRef}
@@ -120,7 +197,6 @@ export default function MasonryGallerySection() {
     >
       <motion.div className="sticky top-0 h-screen w-full overflow-visible" style={{ backgroundColor }}>
         <motion.div style={{ y }} className="relative w-full max-w-[1400px] mx-auto px-4 md:px-8 py-20 pb-32">
-          {/* Título fixo */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -128,23 +204,25 @@ export default function MasonryGallerySection() {
             className="sticky top-8 z-20 mb-8 md:mb-16 text-center px-2"
           >
             <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight leading-[1.1]">
-              <span className="text-lorenzo-accent font-brier text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl">MEUS</span>{" "}
-              <span className="text-white text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl">PROJETOS</span>
+              <span className="text-lorenzo-accent font-brier text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl">
+                {labels.my}
+              </span>{" "}
+              <span className="text-white text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl">
+                {labels.projects}
+              </span>
             </h2>
           </motion.div>
 
           <div className="flex flex-col md:flex-row gap-8 md:gap-10 w-full">
-            {/* Column 1 */}
             <div className="flex flex-col gap-8 md:gap-10 w-full md:w-1/2">
               {column1.map((image, index) => (
-                <MasonryCard key={`col1-${index}`} image={image} index={index * 2} />
+                <MasonryCard key={`col1-${index}`} image={image} labels={labels} />
               ))}
             </div>
 
-            {/* Column 2 */}
             <div className="flex flex-col gap-8 md:gap-10 w-full md:w-1/2">
               {column2.map((image, index) => (
-                <MasonryCard key={`col2-${index}`} image={image} index={index * 2 + 1} />
+                <MasonryCard key={`col2-${index}`} image={image} labels={labels} />
               ))}
             </div>
           </div>
@@ -154,7 +232,9 @@ export default function MasonryGallerySection() {
   )
 }
 
-function MasonryCard({ image, index }: { image: any; index: number }) {
+type LocalizedImage = ReturnType<typeof localizeImages>[number]
+
+function MasonryCard({ image, labels }: { image: LocalizedImage; labels: Labels }) {
   const [showDescription, setShowDescription] = useState(false)
 
   return (
@@ -177,14 +257,12 @@ function MasonryCard({ image, index }: { image: any; index: number }) {
         />
       </motion.div>
 
-      {/* Título e botão abaixo da imagem */}
       <div className="px-1">
         <div className="rounded-xl border border-white/10 bg-black/70 px-4 py-3 shadow-lg backdrop-blur">
           <h3 className="text-sm sm:text-base md:text-lg font-bold text-white mb-2 line-clamp-2 drop-shadow-sm">
             {image.title}
           </h3>
 
-          {/* Descrição expansível */}
           <AnimatePresence>
             {showDescription && (
               <motion.p
@@ -204,7 +282,7 @@ function MasonryCard({ image, index }: { image: any; index: number }) {
               onClick={() => setShowDescription(!showDescription)}
               className="bg-white/10 hover:bg-white/20 text-white text-xs sm:text-sm font-bold px-3 sm:px-4 py-2 rounded-lg transition-colors"
             >
-              {showDescription ? "Menos" : "Detalhes"}
+              {showDescription ? labels.less : labels.details}
             </button>
             <Link
               href={image.link || "#"}
@@ -212,7 +290,7 @@ function MasonryCard({ image, index }: { image: any; index: number }) {
               rel="noopener noreferrer"
               className="bg-lorenzo-accent hover:bg-lorenzo-accent-light text-white text-xs sm:text-sm font-bold px-3 sm:px-4 py-2 rounded-lg transition-colors inline-flex items-center gap-1"
             >
-              Saiba Mais
+              {labels.learnMore}
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M7 17L17 7M17 7H7M17 7V17" />
               </svg>

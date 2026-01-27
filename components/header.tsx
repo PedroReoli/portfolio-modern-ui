@@ -1,13 +1,30 @@
-"use client"
+﻿"use client"
 
 import { useState, useEffect } from "react"
 import { Menu, X } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
+import { useLanguage } from "@/components/language-provider"
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [logoColor, setLogoColor] = useState<"white" | "dark">("dark")
+  const { language, toggleLanguage } = useLanguage()
+
+  const navItems =
+    language === "en"
+      ? [
+          { label: "HOME", href: "#" },
+          { label: "MISSION", href: "#mission" },
+          { label: "GALLERY", href: "#masonry-gallery" },
+          { label: "TECHNOLOGIES", href: "#technologies" },
+        ]
+      : [
+          { label: "INICIO", href: "#" },
+          { label: "MISSAO", href: "#mission" },
+          { label: "GALERIA", href: "#masonry-gallery" },
+          { label: "TECNOLOGIAS", href: "#technologies" },
+        ]
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,7 +37,7 @@ export default function Header() {
         newColor = "white"
       }
 
-      const headerOffset = 100 // Approximate header height
+      const headerOffset = 100
 
       const masonry = document.getElementById("masonry-gallery")
       if (masonry) {
@@ -67,11 +84,7 @@ export default function Header() {
   }, [])
 
   useEffect(() => {
-    if (menuOpen) {
-      document.body.style.overflow = "hidden"
-    } else {
-      document.body.style.overflow = "unset"
-    }
+    document.body.style.overflow = menuOpen ? "hidden" : "unset"
   }, [menuOpen])
 
   return (
@@ -106,6 +119,15 @@ export default function Header() {
             className="flex items-center gap-4 mix-blend-difference"
           >
             <motion.button
+              whileHover={{ scale: 1.06 }}
+              whileTap={{ scale: 0.94 }}
+              onClick={toggleLanguage}
+              className="p-2 bg-lorenzo-dark/80 border border-white/30 hover:bg-lorenzo-dark rounded-lg transition-colors text-white px-3 sm:px-3.5 py-2 sm:py-2.5 text-xs sm:text-sm font-bold tracking-wide"
+              aria-label={language === "en" ? "Switch to Portuguese" : "Switch to English"}
+            >
+              {language === "en" ? "PT" : "EN"}
+            </motion.button>
+            <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={() => setMenuOpen(!menuOpen)}
@@ -139,12 +161,7 @@ export default function Header() {
               className="text-center px-4"
             >
               <motion.ul className="space-y-4 sm:space-y-6 text-3xl sm:text-4xl md:text-6xl font-black uppercase text-white">
-                {[
-                  { label: "INÍCIO", href: "#" },
-                  { label: "MISSÃO", href: "#mission" },
-                  { label: "GALERIA", href: "#masonry-gallery" },
-                  { label: "TECNOLOGIAS", href: "#technologies" },
-                ].map((item, index) => (
+                {navItems.map((item) => (
                   <motion.li
                     key={item.label}
                     variants={{

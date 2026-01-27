@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 import { useState, useEffect } from "react"
 import { FaWhatsapp, FaEnvelope, FaYoutube, FaInstagram, FaLinkedin, FaGithub } from "react-icons/fa"
+import { useLanguage } from "@/components/language-provider"
 
 const socialImages = [
   "/images/lofan/lofan2.jpg",
@@ -26,6 +27,10 @@ const handIcons = [
 
 export default function SocialSection() {
   const [currentIconIndex, setCurrentIconIndex] = useState(0)
+  const { language } = useLanguage()
+
+  const followText = language === "en" ? "Follow me on social media" : "Me siga nas redes sociais"
+  const comingSoonText = language === "en" ? "(Coming Soon)" : "(Em Breve)"
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -65,7 +70,7 @@ export default function SocialSection() {
           className="text-center mb-8 md:mb-12"
         >
           <h2 className="text-xl sm:text-2xl md:text-5xl lg:text-6xl xl:text-7xl font-black uppercase leading-tight text-lorenzo-dark mb-4 md:mb-8 px-2">
-            Me siga nas redes sociais
+            {followText}
           </h2>
         </motion.div>
 
@@ -152,7 +157,7 @@ export default function SocialSection() {
             >
               <FaYoutube className="w-7 h-7 md:w-8 md:h-8" />
               <span className="absolute -bottom-4 left-1/2 -translate-x-1/2 text-[10px] md:text-xs text-black/60 whitespace-nowrap">
-                (Em Breve)
+                {comingSoonText}
               </span>
             </motion.a>
             <motion.a

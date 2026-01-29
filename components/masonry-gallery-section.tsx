@@ -22,19 +22,19 @@ type GalleryImage = {
 }
 
 const galleryImages: GalleryImage[] = [
-  // {
-  //   src: "/images/a1.png",
-  //   alt: "Autocom3",
-  //   link: "https://autocom3.com.br",
-  //   title: {
-  //     pt: "Autocom3 – Sistemas de Gestão ERP",
-  //     en: "Autocom3 – ERP Management Systems",
-  //   },
-  //   description: {
-  //     pt: "Site institucional criado para empresa especializada em sistemas ERP para o varejo. A estrutura foi planejada para apresentar soluções, módulos e diferenciais da plataforma de forma clara e objetiva.",
-  //     en: "A corporate website built for a company specializing in ERP systems for retail. The structure was designed to present solutions, modules, and platform differentiators in a clear and objective way.",
-  //   },
-  // },
+  {
+    src: "/images/a1.png",
+    alt: "Autocom3",
+    link: "https://autocom3.com.br",
+    title: {
+      pt: "Autocom3 – Sistemas de Gestão ERP",
+      en: "Autocom3 – ERP Management Systems",
+    },
+    description: {
+      pt: "Site institucional criado para empresa especializada em sistemas ERP para o varejo. A estrutura foi planejada para apresentar soluções, módulos e diferenciais da plataforma de forma clara e objetiva.",
+      en: "A corporate website built for a company specializing in ERP systems for retail. The structure was designed to present solutions, modules, and platform differentiators in a clear and objective way.",
+    },
+  },
   {
     src: "/images/a2.png",
     alt: "Le Fauteuil",

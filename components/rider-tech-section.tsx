@@ -52,7 +52,7 @@ function getContent(language: Language): Content {
     aboutPrimary: "SOBRE",
     aboutSecondary: "MIM",
     intro1:
-      "Desenvolvedor apaixonado por criar solucoes web que unem design elegante e funcionalidade de ponta. Especializado em desenvolvimento front-end e back-end, com foco em performance, escalabilidade e experiencia do usuario.",
+      "Desenvolvedor apaixonado por criar soluções web que unem design elegante e funcionalidade de ponta. Especializado em desenvolvimento front-end e back-end, com foco em performance, escalabilidade e experiência do usuário.",
     intro2:
       "Alem de projetos comerciais, dedico-me a iniciativas de impacto social que utilizam tecnologia para transformar vidas e promover inclusao digital.",
     evaAlt1: "EVA.Tech - Projeto de empoderamento digital",
@@ -64,7 +64,7 @@ function getContent(language: Language): Content {
     evaLink: "Saiba mais sobre o projeto ->",
     falaTitle: "FalaAtipica",
     falaDesc:
-      "Solucao tecnologica voltada a criancas com atraso de fala, promovendo a expressao verbal de forma ludica, acessivel e afetiva.",
+      "Solução tecnológica voltada a crianças com atraso de fala, promovendo a expressão verbal de forma lúdica, acessível e afetiva.",
     falaLink: "Conheca o projeto ->",
     falaAlt: "FalaAtipica - Tecnologia assistiva para criancas",
   }

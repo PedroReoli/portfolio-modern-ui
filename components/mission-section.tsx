@@ -31,10 +31,10 @@ function getMissionText(language: Language): MissionText {
     redefining: "REDEFININDO",
     limits: "LIMITES",
     creating: "CRIANDO",
-    solutions: "SOLUCOES",
+    solutions: "SOLUÇÕES",
     transformingIdeas: "TRANSFORMANDO IDEIAS",
     into: "EM",
-    realExperiences: "EXPERIENCIAS REAIS",
+    realExperiences: "EXPERIÊNCIAS REAIS",
   }
 }
 
